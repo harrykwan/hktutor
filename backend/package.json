@@ -4,13 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon --exec babel-node index.js",
+    "babelbuild": "babel app.js -d dist",
+    "babelstart": "npm run build && node dist/index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "nodemon": "^2.0.4",
     "request": "^2.88.2",
     "vimeo": "^2.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
   }
 }
