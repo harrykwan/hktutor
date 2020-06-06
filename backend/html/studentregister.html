@@ -131,6 +131,17 @@ License: You must have a valid license purchased only from themeforest(the above
                 var mypw = registerform[3].value
                 var myfname = registerform[0].value
                 var mylname = registerform[1].value
+                //check if user enters correct password twice
+                if (registerform[3].value !== registerform[4].value) {
+                        alert("Unmatched password:\nPlease enter the correct password twice.")
+                        return
+                }
+                //check if user has agreed to T&C
+                if (!document.getElementById('remember-me').checked) {
+                    alert("Please agree to our Privacy Policy before registration.")
+                    return
+                }
+
                 firebase.auth().createUserWithEmailAndPassword(myemail, mypw).then(function () {
                     var user = firebase.auth().currentUser;
                     console.log(user)
@@ -147,8 +158,18 @@ License: You must have a valid license purchased only from themeforest(the above
                     // Handle Errors here.
                     var errorCode = error.code;
                     var errorMessage = error.message;
+                    // console.log(errorCode)
+                    // console.log(errorMessage)
+                    if (errorCode === "auth/email-already-in-use") {
+                        alert("This email address is already registered:\nPlease log in.")
+                    } else if (errorCode === "auth/invalid-email") {
+                        alert("Invalid email address:\nPlease enter a valid email address.")
+                    } else if (errorCode === "auth/weak-password") {
+                        alert("Weak password:\nPassword should be at least 6 characters.")
+                    } else {
+                        alert("Registration error:\nPlease enter the correct information.")
+                    }
                     // ...
-                    console.log(errorMessage)
                 });
             }
 
@@ -166,6 +187,7 @@ License: You must have a valid license purchased only from themeforest(the above
             });
             // [END sendemailverification]
         }
+
 
 
         function sendPhoneVerification() {
@@ -191,6 +213,14 @@ License: You must have a valid license purchased only from themeforest(the above
         function gotologinpage() {
             window.location.href = "/login";
         }
+        
+        var input = document.getElementById("registerform");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("registerbutton").click();
+            }
+        })
     </script>
     <!-- END: JS Assets-->
 </body>

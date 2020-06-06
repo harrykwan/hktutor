@@ -120,7 +120,13 @@
                     // Handle Errors here.
                     var errorCode = error.code;
                     var errorMessage = error.message;
-                    console.log(errorMessage)
+                    // console.log(errorCode)
+                    // console.log(errorMessage)
+                    if (errorCode === "auth/wrong-password") {
+                        alert("You have entered an incorrect password")
+                    } else {
+                        alert("You have entered an incorrect email account")
+                    }
                     // ...
                 });
 
@@ -146,7 +152,15 @@
             });
         }
 
+        var input = document.getElementById("loginform");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("loginbutton").click();
+            }
+        })
 
+        
 
         startpage()
     </script>
