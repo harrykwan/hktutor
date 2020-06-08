@@ -14,6 +14,7 @@ app.get('/registerstudent', (req, res) => res.sendFile('html/studentregister.htm
 app.get('/profile', (req, res) => res.sendFile('html/profile.html', { root: __dirname }))
 app.get('/home', (req, res) => res.sendFile('html/index.html', { root: __dirname }))
 app.get('/emailconfirm', (req, res) => res.sendFile('html/emailconfirm.html', { root: __dirname }))
+app.get('/tutorpersonalinfo', (req, res) => res.sendFile('html/tutorpersonalinfo.html', { root: __dirname }))
 
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
