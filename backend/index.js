@@ -12,10 +12,10 @@ app.get('/chooseside', (req, res) => res.sendFile('html/chooseside.html', {
     root: __dirname
 }))
 // app.get('/login', (req, res) => res.sendFile('html/login.html', { root: __dirname }))
-app.get('/logintutor', (req, res) => res.sendFile('html/tutorlogin.html', {
+app.get('/tutorlogin', (req, res) => res.sendFile('html/tutorlogin.html', {
     root: __dirname
 }))
-app.get('/loginstudent', (req, res) => res.sendFile('html/studentlogin.html', {
+app.get('/studentlogin', (req, res) => res.sendFile('html/studentlogin.html', {
     root: __dirname
 }))
 // app.get('/register', (req, res) => res.sendFile('html/register.html', { root: __dirname }))
