@@ -1435,7 +1435,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <textarea class="input w-full border mt-2"
                                         placeholder="Adress">大家好, 這是我在 3 Ninjas 的自我介紹, 請多多支持!</textarea>
                                 </div>
-                                <button type="button" class="button w-20 bg-theme-1 text-white mt-3">Save</button>
+                                <button type="button" class="button w-20 bg-theme-1 text-white mt-3" onclick="writeUserData()>Save</button> //TODO: pass what parameters?
                             </div>
                         </div>
                     </div>
@@ -1571,6 +1571,15 @@ License: You must have a valid license purchased only from themeforest(the above
                 window.location.href = "chooseside";
             }
         });
+
+        function writeUserData(name, email) {
+            var userId = firebase.auth().currentUser.uid
+            firebase.database().ref('users/' + userId).set({
+                username: name,
+                email: email,
+                // profile_picture : imageUrl
+            });
+        }
     </script>
 </body>
 
