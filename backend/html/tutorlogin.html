@@ -76,7 +76,7 @@
                         account. Manage all your e-commerce accounts in one place</div> -->
                     <div class="intro-x mt-8" id="loginform">
                         <input type=" text" class="intro-x login__input input input--lg border border-gray-300 block"
-                        placeholder="Email">
+                            placeholder="Email">
                         <input type="password"
                             class="intro-x login__input input input--lg border border-gray-300 block mt-4"
                             placeholder="Password">
@@ -92,7 +92,8 @@
                         <button id="loginbutton"
                             class="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3">Login</button>
                         <button
-                            class="button button--lg w-full xl:w-32 text-gray-700 border border-gray-300 mt-3 xl:mt-0"><a href="/registertutor">Sign up</a></button>
+                            class="button button--lg w-full xl:w-32 text-gray-700 border border-gray-300 mt-3 xl:mt-0"><a
+                                href="/registertutor">Sign up</a></button>
                     </div>
                     <div class="intro-x mt-10 xl:mt-24 text-gray-700 text-center xl:text-left">
                         By signin up, you agree to our
@@ -144,7 +145,7 @@
                     var providerData = user.providerData;
                     // ...
                     console.log(user)
-                    window.location.href = "/profile";
+                    window.location.href = "/profiletutor";
                 } else {
                     // User is signed out.
                     // ...
@@ -153,7 +154,7 @@
         }
 
         var input = document.getElementById("loginform");
-        input.addEventListener("keyup", function(event) {
+        input.addEventListener("keyup", function (event) {
             if (event.keyCode === 13) {
                 event.preventDefault();
                 document.getElementById("loginbutton").click();
