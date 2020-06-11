@@ -1395,20 +1395,17 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="mt-3">
                                     <label>地區</label>
                                     <div class="mt-2">
-                                        <select class="select2 w-full">
-                                            <option selected disabled hidden>請選擇...</option>
-                                            <!-- <option selected disabled>香港島</option> -->
+                                        <select class="select2 w-full" id="districtinput">
+                                            <option value="0" selected disabled hidden>請選擇...</option>
                                             <option value="1">中西區</option>
                                             <option value="2">灣仔區</option>
                                             <option value="3">東區</option>
                                             <option value="4">南區</option>
-                                            <!-- <option selected disabled>九龍</option> -->
                                             <option value="5">深水埗區</option>
                                             <option value="6">油尖旺區</option>
                                             <option value="7">九龍城區</option>
                                             <option value="8">黃大仙區</option>
                                             <option value="9">觀塘區</option>
-                                            <!-- <option selected disabled>新界</option> -->
                                             <option value="10">葵青區</option>
                                             <option value="11">荃灣區</option>
                                             <option value="12">屯門區</option>
@@ -1424,8 +1421,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="mt-3">
                                     <label>自我介紹</label>
-                                    <textarea class="input w-full border mt-2"
-                                        placeholder="Adress">大家好, 這是我在 3 Ninjas 的自我介紹, 請多多支持!</textarea>
+                                    <textarea id="introinput" class="input w-full border mt-2"
+                                        placeholder="Intro"></textarea>
                                 </div>
                                 <button onclick="savepart1()" type="button"
                                     class="button w-20 bg-theme-1 text-white mt-3">Save</button>
@@ -1536,6 +1533,29 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <script>
         var nowuser
+        var alldistrict = ["中西區", "灣仔區", "東區", "南區", "深水埗區", "油尖旺區", "九龍城區", "黃大仙區", "觀塘區", "葵青區", "荃灣區", "屯門區", "元朗區",
+            "北區", "大埔區", "沙田區", "西貢區", "離島區"
+        ]
+
+        function gendistricthtml(selectvalue) {
+            var districthtml
+            if (selectvalue == 0) {
+                districthtml = '<option value="0" selected disabled hidden>請選擇...</option>';
+            } else {
+                districthtml = '<option value="0" disabled hidden>請選擇...</option>';
+            }
+
+            for (var j = 0; j < alldistrict.length; j++) {
+                if (selectvalue == j + 1) {
+                    districthtml += '<option selected value=' + (j + 1) + '>' + alldistrict[j] + '</option>'
+                } else {
+                    districthtml += '<option value=' + (j + 1) + '>' + alldistrict[j] + '</option>'
+                }
+
+            }
+            document.getElementById('districtinput').innerHTML = districthtml
+        }
+
 
         function logout() {
             firebase.auth().signOut().then(function () {
@@ -1573,6 +1593,17 @@ License: You must have a valid license purchased only from themeforest(the above
                 document.getElementById('profile_email_input').value = email
                 document.getElementById('shownamediv').innerHTML = displayName
                 document.getElementById('showemaildiv').innerHTML = email
+
+                dbgetitem(uid, function (response) {
+                    if (response != "{}") {
+                        response = JSON.parse(response)
+                        document.getElementById('introinput').value = response.Item.intro
+                        gendistricthtml(parseInt(response.Item.district))
+                    }
+                })
+
+
+
                 console.log(user)
             } else {
                 // User is signed out.
@@ -1608,28 +1639,84 @@ License: You must have a valid license purchased only from themeforest(the above
             reader.readAsDataURL(event.target.files[0]);
         }
 
+        function dbsaveitem(itemdata, callback) {
+            var form = new FormData();
+            for (j in itemdata) {
+                form.append(j, itemdata[j]);
+            }
+            var settings = {
+                "url": "awscreatedata",
+                "method": "POST",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": form
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                if (callback) {
+                    callback(response)
+                }
+            });
+        }
+
+        function dbgetitem(uid, callback) {
+            var form = new FormData();
+            var settings = {
+                "url": "awsreaddata/" + uid,
+                "method": "GET",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": form
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                if (callback) {
+                    callback(response)
+                }
+            });
+        }
+
         function savepart1() {
             var mypropic = document.getElementById('propicupload')
-            uploadfile(mypropic.files[0],
-                nowuser.uid + '.' + mypropic.value.split('.')[1],
-                function (response) {
-                    response = JSON.parse(response)
-                    console.log(response);
+            if (mypropic.files[0]) {
+                uploadfile(mypropic.files[0],
+                    nowuser.uid + '.' + mypropic.value.split('.')[1],
+                    function (response) {
+                        response = JSON.parse(response)
+                        console.log(response);
 
-                    var user = firebase.auth().currentUser;
-                    console.log(response.key)
-                    user.updateProfile({
-                        photoURL: response.key
-                    }).then(function () {
-                        //photo updated
-                        console.log('ok')
-                    }).catch(function (error) {
-                        // An error happened.
-                        console.log(error)
-                    });
+                        var user = firebase.auth().currentUser;
+                        console.log(response.key)
+                        user.updateProfile({
+                            photoURL: response.key
+                        }).then(function () {
+                            //photo updated
+                            console.log('ok')
+                        }).catch(function (error) {
+                            // An error happened.
+                            console.log(error)
+                        });
 
-                })
+                    })
+            }
+
+            var introinput = document.getElementById("introinput").value
+            var districtinput = document.getElementById('districtinput').value
+            var tempjson = {
+                uid: nowuser.uid,
+                intro: introinput,
+                district: districtinput
+            }
+            dbsaveitem(tempjson)
         }
+
+        // select2-districtinput-container
     </script>
 </body>
 

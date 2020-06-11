@@ -1,16 +1,19 @@
 const AWS = require('aws-sdk');
+const BUCKET_NAME = '3ninjas-profilepic';
+const IAM_USER_KEY = 'AKIAT457LS74YL4GQEGS';
+const IAM_USER_SECRET = '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';
+
 AWS.config.update({
-    region: 'ap-east-1'
+    region: 'ap-east-1',
+    accessKeyId: IAM_USER_KEY,
+    secretAccessKey: IAM_USER_SECRET
 });
 
 const Busboy = require('busboy');
 
-const BUCKET_NAME = '3ninjas-profilepic';
-const IAM_USER_KEY = 'AKIAT457LS74YL4GQEGS';
-const IAM_USER_SECRET = '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';
 let s3bucket = new AWS.S3({
-    accessKeyId: IAM_USER_KEY,
-    secretAccessKey: IAM_USER_SECRET,
+    // accessKeyId: IAM_USER_KEY,
+    // secretAccessKey: IAM_USER_SECRET,
     Bucket: BUCKET_NAME
 });
 
@@ -79,25 +82,15 @@ function uploadroute(req, res, next) {
 
 function createtable() {
     var params = {
-        TableName: "",
+        TableName: "userprofiledata",
         KeySchema: [{
-                AttributeName: "year",
-                KeyType: "HASH"
-            }, //Partition key
-            {
-                AttributeName: "title",
-                KeyType: "RANGE"
-            } //Sort key
-        ],
+            AttributeName: "uid",
+            KeyType: "HASH"
+        }],
         AttributeDefinitions: [{
-                AttributeName: "year",
-                AttributeType: "N"
-            },
-            {
-                AttributeName: "title",
-                AttributeType: "S"
-            }
-        ],
+            AttributeName: "uid",
+            AttributeType: "S"
+        }],
         ProvisionedThroughput: {
             ReadCapacityUnits: 10,
             WriteCapacityUnits: 10
@@ -113,21 +106,12 @@ function createtable() {
     });
 }
 
-function createitem() {
-    var table = "Movies";
-    var year = 2015;
-    var title = "The Big New Movie";
+function createitem(item, req, res) {
+    var table = "userprofiledata";
 
     var params = {
         TableName: table,
-        Item: {
-            "year": year,
-            "title": title,
-            "info": {
-                "plot": "Nothing happens at all.",
-                "rating": 0
-            }
-        }
+        Item: item
     };
 
     console.log("Adding a new item...");
@@ -135,21 +119,26 @@ function createitem() {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("Added item:", JSON.stringify(data, null, 2));
+            if (res) {
+                res.send(data)
+            }
+            console.log("Added item:", data);
         }
     });
 }
 
-function readitem() {
-    var table = "Movies";
-    var year = 2015;
-    var title = "The Big New Movie";
+// createitem({
+//     uid: "testuid",
+//     testdata: "testdata"
+// })
+
+function readitem(uid, req, res) {
+    var table = "userprofiledata";
 
     var params = {
         TableName: table,
         Key: {
-            "year": year,
-            "title": title
+            "uid": uid,
         }
     };
 
@@ -157,42 +146,20 @@ function readitem() {
         if (err) {
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+            if (res) {
+                res.send(data)
+            }
+            console.log("GetItem succeeded:", data);
         }
     });
 }
 
-function updateitem() {
-    var table = "Movies";
-    var year = 2015;
-    var title = "The Big New Movie";
-
-    var params = {
-        TableName: table,
-        Key: {
-            "year": year,
-            "title": title
-        },
-        UpdateExpression: "set info.rating = :r, info.plot=:p, info.actors=:a",
-        ExpressionAttributeValues: {
-            ":r": 5.5,
-            ":p": "Everything happens all at once.",
-            ":a": ["Larry", "Moe", "Curly"]
-        },
-        ReturnValues: "UPDATED_NEW"
-    };
-
-    console.log("Updating the item...");
-    docClient.update(params, function (err, data) {
-        if (err) {
-            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
-        }
-    });
-}
+// readitem('testuid')
 
 
 exports.uploadToS3 = uploadToS3
 exports.upload = uploadroute
 exports.getphoto = getphotofroms3
+exports.createtable = createtable
+exports.createitem = createitem
+exports.readitem = readitem

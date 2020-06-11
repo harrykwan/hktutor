@@ -66,4 +66,14 @@ app.get('/awsdownload/:key', (req, res) => {
 })
 
 
+app.post('/awscreatedata', (req, res) => {
+    console.log(req.body)
+    awsapi.createitem(req.body, req, res)
+})
+
+app.get('/awsreaddata/:uid', (req, res) => {
+    awsapi.readitem(req.params.uid, req, res)
+})
+
+
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
