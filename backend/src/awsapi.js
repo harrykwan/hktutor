@@ -1,0 +1,79 @@
+const AWS = require('aws-sdk');
+AWS.config.update({
+    region: 'ap-east-1'
+});
+
+const Busboy = require('busboy');
+
+const BUCKET_NAME = '3ninjas-profilepic';
+const IAM_USER_KEY = 'AKIAT457LS74YL4GQEGS';
+const IAM_USER_SECRET = '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';
+let s3bucket = new AWS.S3({
+    accessKeyId: IAM_USER_KEY,
+    secretAccessKey: IAM_USER_SECRET,
+    Bucket: BUCKET_NAME
+});
+
+function uploadToS3(file, res) {
+    s3bucket.createBucket(function () {
+        var params = {
+            Bucket: BUCKET_NAME,
+            Key: file.name,
+            Body: file.data
+        };
+        s3bucket.upload(params, function (err, data) {
+            if (err) {
+                console.log('error in callback');
+                console.log(err);
+            }
+            console.log('success');
+            console.log(data.Location);
+            if (res) {
+                res.send(data)
+            }
+        });
+    });
+}
+
+function getphotofroms3(x, req, res) {
+    var params = {
+        Bucket: BUCKET_NAME,
+        Key: x
+    };
+    s3bucket.getObject(params, function (err, data) {
+        res.writeHead(200, {
+            'Content-Type': 'image/' + x.split('.')[1]
+        });
+        res.write(data.Body, 'binary');
+        res.end(null, 'binary');
+    });
+}
+
+
+
+function uploadroute(req, res, next) {
+    // This grabs the additional parameters so in this case passing in
+    // "element1" with a value.
+    const element1 = req.body.element1;
+
+    var busboy = new Busboy({
+        headers: req.headers
+    });
+
+    // The file upload has completed
+    busboy.on('finish', function () {
+        console.log('Upload finished');
+        // console.log(req.file)
+        const file = req.files.myfile1;
+        // console.log(file);
+
+        // Begins the upload to the AWS S3
+        uploadToS3(file, res);
+    });
+
+    req.pipe(busboy);
+}
+
+exports.uploadToS3 = uploadToS3
+exports.upload = uploadroute
+exports.getphoto = getphotofroms3
