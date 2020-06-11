@@ -10,6 +10,7 @@ License: You must have a valid license purchased only from themeforest(the above
 -->
 <html lang="en">
 <!-- BEGIN: Head -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
@@ -1370,23 +1371,26 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="col-span-12 xl:col-span-4">
                                 <div class="border border-gray-200 rounded-md p-5">
                                     <div class="w-40 h-40 relative image-fit cursor-pointer zoom-in mx-auto">
-                                        <img class="rounded-md" alt="Midone Tailwind HTML Admin Template"
+                                        <img id="propicpreview" class="rounded-md" alt=""
                                             src="dist/images/profile-4.jpg">
                                         <div title="Remove this profile photo?"
                                             class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-theme-6 right-0 top-0 -mr-2 -mt-2">
                                             <i data-feather="x" class="w-4 h-4"></i> </div>
                                     </div>
                                     <div class="w-40 mx-auto cursor-pointer relative mt-5">
-                                        <button type="button" class="button w-full bg-theme-1 text-white">更換個人相片</button>
-                                        <input type="file" class="w-full h-full top-0 left-0 absolute opacity-0">
+                                        <button type="button"
+                                            class="button w-full bg-theme-1 text-white">更換個人相片</button>
+                                        <input id="propicupload" onchange="preview_image(event)" type="file"
+                                            class="w-full h-full top-0 left-0 absolute opacity-0">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-span-12 xl:col-span-8">
                                 <div>
                                     <label>顯示名稱</label>
-                                    <input type="text" class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
-                                        placeholder="Input text" value="陳小明" disabled>
+                                    <input id="profile_displayname_input" type="text"
+                                        class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
+                                        placeholder="Input text" value="" disabled>
                                 </div>
                                 <div class="mt-3">
                                     <label>地區</label>
@@ -1423,7 +1427,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <textarea class="input w-full border mt-2"
                                         placeholder="Adress">大家好, 這是我在 3 Ninjas 的自我介紹, 請多多支持!</textarea>
                                 </div>
-                                <button type="button" class="button w-20 bg-theme-1 text-white mt-3">Save</button>
+                                <button onclick="savepart1()" type="button"
+                                    class="button w-20 bg-theme-1 text-white mt-3">Save</button>
                             </div>
                         </div>
                     </div>
@@ -1441,13 +1446,14 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="col-span-12 xl:col-span-6">
                                 <div>
                                     <label>電郵</label>
-                                    <input type="text" class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
-                                        placeholder="Input text" value="morganfreeman@left4code.com" disabled>
+                                    <input id="profile_email_input" type="text"
+                                        class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
+                                        placeholder="Input text" value="" disabled>
                                 </div>
                                 <div class="mt-3">
                                     <label>名字</label>
-                                    <input type="text" class="input w-full border mt-2" placeholder="Input text"
-                                        value="Morgan Freeman" disabled>
+                                    <input id="profile_realname_input" type="text" class="input w-full border mt-2"
+                                        placeholder="Input text" value="">
                                 </div>
                                 <div class="mt-3">
                                     <label>身份證明文件</label>
@@ -1510,7 +1516,8 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="flex justify-end mt-4">
                             <a href="" class="text-theme-6 flex items-center"> <i data-feather="trash-2"
                                     class="w-4 h-4 mr-1"></i> Delete Account </a>
-                            <button type="button" class="button w-20 bg-theme-1 text-white ml-auto">Save</button>
+                            <button onclick="savepart2()" type="button"
+                                class="button w-20 bg-theme-1 text-white ml-auto">Save</button>
                         </div>
                     </div>
                 </div>
@@ -1528,6 +1535,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END: JS Assets-->
 
     <script>
+        var nowuser
+
         function logout() {
             firebase.auth().signOut().then(function () {
                 // Sign-out successful.
@@ -1539,6 +1548,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
+                nowuser = user
                 // User is signed in.
                 var displayName = user.displayName;
                 var email = user.email;
@@ -1555,6 +1565,12 @@ License: You must have a valid license purchased only from themeforest(the above
 
                 }
 
+
+                if (photoURL) {
+                    document.getElementById('propicpreview').src = 'awsdownload/' + photoURL
+                }
+                document.getElementById('profile_displayname_input').value = displayName
+                document.getElementById('profile_email_input').value = email
                 document.getElementById('shownamediv').innerHTML = displayName
                 document.getElementById('showemaildiv').innerHTML = email
                 console.log(user)
@@ -1564,6 +1580,56 @@ License: You must have a valid license purchased only from themeforest(the above
                 window.location.href = "chooseside";
             }
         });
+
+        function uploadfile(x, filename, callback) {
+            var form = new FormData();
+            form.append("myfile1", x, filename);
+            var settings = {
+                "url": "awsupload",
+                "method": "POST",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": form
+            };
+
+            $.ajax(settings).done(function (response) {
+                callback(response)
+            });
+        }
+
+        function preview_image(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('propicpreview');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function savepart1() {
+            var mypropic = document.getElementById('propicupload')
+            uploadfile(mypropic.files[0],
+                nowuser.uid + '.' + mypropic.value.split('.')[1],
+                function (response) {
+                    response = JSON.parse(response)
+                    console.log(response);
+
+                    var user = firebase.auth().currentUser;
+                    console.log(response.key)
+                    user.updateProfile({
+                        photoURL: response.key
+                    }).then(function () {
+                        //photo updated
+                        console.log('ok')
+                    }).catch(function (error) {
+                        // An error happened.
+                        console.log(error)
+                    });
+
+                })
+        }
     </script>
 </body>
 
