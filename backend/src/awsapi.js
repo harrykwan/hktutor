@@ -14,6 +14,9 @@ let s3bucket = new AWS.S3({
     Bucket: BUCKET_NAME
 });
 
+var dynamodb = new AWS.DynamoDB();
+var docClient = new AWS.DynamoDB.DocumentClient();
+
 function uploadToS3(file, res) {
     s3bucket.createBucket(function () {
         var params = {
@@ -73,6 +76,122 @@ function uploadroute(req, res, next) {
 
     req.pipe(busboy);
 }
+
+function createtable() {
+    var params = {
+        TableName: "",
+        KeySchema: [{
+                AttributeName: "year",
+                KeyType: "HASH"
+            }, //Partition key
+            {
+                AttributeName: "title",
+                KeyType: "RANGE"
+            } //Sort key
+        ],
+        AttributeDefinitions: [{
+                AttributeName: "year",
+                AttributeType: "N"
+            },
+            {
+                AttributeName: "title",
+                AttributeType: "S"
+            }
+        ],
+        ProvisionedThroughput: {
+            ReadCapacityUnits: 10,
+            WriteCapacityUnits: 10
+        }
+    };
+
+    dynamodb.createTable(params, function (err, data) {
+        if (err) {
+            console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
+        }
+    });
+}
+
+function createitem() {
+    var table = "Movies";
+    var year = 2015;
+    var title = "The Big New Movie";
+
+    var params = {
+        TableName: table,
+        Item: {
+            "year": year,
+            "title": title,
+            "info": {
+                "plot": "Nothing happens at all.",
+                "rating": 0
+            }
+        }
+    };
+
+    console.log("Adding a new item...");
+    docClient.put(params, function (err, data) {
+        if (err) {
+            console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Added item:", JSON.stringify(data, null, 2));
+        }
+    });
+}
+
+function readitem() {
+    var table = "Movies";
+    var year = 2015;
+    var title = "The Big New Movie";
+
+    var params = {
+        TableName: table,
+        Key: {
+            "year": year,
+            "title": title
+        }
+    };
+
+    docClient.get(params, function (err, data) {
+        if (err) {
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+        }
+    });
+}
+
+function updateitem() {
+    var table = "Movies";
+    var year = 2015;
+    var title = "The Big New Movie";
+
+    var params = {
+        TableName: table,
+        Key: {
+            "year": year,
+            "title": title
+        },
+        UpdateExpression: "set info.rating = :r, info.plot=:p, info.actors=:a",
+        ExpressionAttributeValues: {
+            ":r": 5.5,
+            ":p": "Everything happens all at once.",
+            ":a": ["Larry", "Moe", "Curly"]
+        },
+        ReturnValues: "UPDATED_NEW"
+    };
+
+    console.log("Updating the item...");
+    docClient.update(params, function (err, data) {
+        if (err) {
+            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+        }
+    });
+}
+
 
 exports.uploadToS3 = uploadToS3
 exports.upload = uploadroute

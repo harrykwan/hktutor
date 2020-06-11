@@ -1377,7 +1377,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <i data-feather="x" class="w-4 h-4"></i> </div>
                                     </div>
                                     <div class="w-40 mx-auto cursor-pointer relative mt-5">
-                                        <button type="button" class="button w-full bg-theme-1 text-white">更換個人相片</button>
+                                        <button type="button"
+                                            class="button w-full bg-theme-1 text-white">更換個人相片</button>
                                         <input type="file" class="w-full h-full top-0 left-0 absolute opacity-0">
                                     </div>
                                 </div>
@@ -1385,8 +1386,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="col-span-12 xl:col-span-8">
                                 <div>
                                     <label>顯示名稱</label>
-                                    <input type="text" class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
-                                        placeholder="Input text" value="陳小明" disabled>
+                                    <input id="profile_displayname_input" type="text"
+                                        class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
+                                        placeholder="Input text" value="" disabled>
                                 </div>
                                 <div class="mt-3">
                                     <label>地區</label>
@@ -1441,13 +1443,14 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="col-span-12 xl:col-span-6">
                                 <div>
                                     <label>電郵</label>
-                                    <input type="text" class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
-                                        placeholder="Input text" value="morganfreeman@left4code.com" disabled>
+                                    <input id="profile_email_input" type="text"
+                                        class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
+                                        placeholder="Input text" value="" disabled>
                                 </div>
                                 <div class="mt-3">
                                     <label>名字</label>
-                                    <input type="text" class="input w-full border mt-2" placeholder="Input text"
-                                        value="Morgan Freeman" disabled>
+                                    <input id="profile_realname_input" type="text" class="input w-full border mt-2"
+                                        placeholder="Input text" value="Morgan Freeman" disabled>
                                 </div>
                                 <div class="mt-3">
                                     <label>身份證明文件</label>
@@ -1463,48 +1466,48 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <input type="text" class="input w-full border mt-2" placeholder="Input text"
                                         value="Y123456(7)">
                                 </div>
+                            </div>
+                            <div class="col-span-12 xl:col-span-6">
+                                <div>
+                                    <label>電話號碼</label>
+                                    <input type="text" class="input w-full border mt-2" placeholder="Input text"
+                                        value="65570828">
                                 </div>
-                                <div class="col-span-12 xl:col-span-6">
-                                    <div>
-                                        <label>電話號碼</label>
-                                        <input type="text" class="input w-full border mt-2" placeholder="Input text"
-                                            value="65570828">
+                                <div class="mt-3">
+                                    <label>Address</label>
+                                    <input type="text" class="input w-full border mt-2" placeholder="Input text"
+                                        value="10 Anson Road, International Plaza, #10-11, 079903 Singapore, Singapore">
+                                </div>
+                                <div class="mt-3">
+                                    <label>地址</label>
+                                    <input type="text" class="input w-full border mt-2" placeholder="Input text"
+                                        value="1 Victory street, Hong Kong">
+                                </div>
+                                <div class="mt-3">
+                                    <label>銀行名稱</label>
+                                    <div class="mt-2">
+                                        <select class="select2 w-full">
+                                            <option selected disabled hidden>請選擇...</option>
+                                            <option value="1">香港上海滙豐銀行</option>
+                                            <option value="2">恒生銀行</option>
+                                            <option value="3">渣打銀行(香港)</option>
+                                            <option value="4">BEA東亞銀行</option>
+                                            <option value="5">中國銀行(香港)</option>
+                                            <option value="6">花旗銀行(香港)</option>
+                                            <option value="7">星展銀行(香港)</option>
+                                            <option value="8">大新銀行</option>
+                                            <option value="9">中國工商銀行(亞洲)</option>
+                                            <option value="10">上海商業銀行</option>
+                                            <option value="11">大眾銀行(香港)</option>
+                                            <option value="12">交通銀行(香港)</option>
+                                        </select>
                                     </div>
-                                    <div class="mt-3">
-                                        <label>Address</label>
-                                        <input type="text" class="input w-full border mt-2" placeholder="Input text"
-                                            value="10 Anson Road, International Plaza, #10-11, 079903 Singapore, Singapore">
-                                    </div>
-                                    <div class="mt-3">
-                                        <label>地址</label>
-                                        <input type="text" class="input w-full border mt-2" placeholder="Input text"
-                                            value="1 Victory street, Hong Kong">
-                                    </div>
-                                    <div class="mt-3">
-                                        <label>銀行名稱</label>
-                                        <div class="mt-2">
-                                            <select class="select2 w-full">
-                                                <option selected disabled hidden>請選擇...</option>
-                                                <option value="1">香港上海滙豐銀行</option>
-                                                <option value="2">恒生銀行</option>
-                                                <option value="3">渣打銀行(香港)</option>
-                                                <option value="4">BEA東亞銀行</option>
-                                                <option value="5">中國銀行(香港)</option>
-                                                <option value="6">花旗銀行(香港)</option>
-                                                <option value="7">星展銀行(香港)</option>
-                                                <option value="8">大新銀行</option>
-                                                <option value="9">中國工商銀行(亞洲)</option>
-                                                <option value="10">上海商業銀行</option>
-                                                <option value="11">大眾銀行(香港)</option>
-                                                <option value="12">交通銀行(香港)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <label>銀行戶口</label>
-                                        <input type="text" class="input w-full border mt-2" placeholder="Input text"
-                                            value="001-123456-999">
-                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <label>銀行戶口</label>
+                                    <input type="text" class="input w-full border mt-2" placeholder="Input text"
+                                        value="001-123456-999">
+                                </div>
                             </div>
                         </div>
                         <div class="flex justify-end mt-4">
@@ -1557,6 +1560,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                 document.getElementById('shownamediv').innerHTML = displayName
                 document.getElementById('showemaildiv').innerHTML = email
+
                 console.log(user)
             } else {
                 // User is signed out.

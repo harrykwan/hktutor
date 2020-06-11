@@ -1388,8 +1388,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="col-span-12 xl:col-span-8">
                                 <div>
                                     <label>顯示名稱</label>
-                                    <input type="text" class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
-                                        placeholder="Input text" value="陳小明" disabled>
+                                    <input id="profile_displayname_input" type="text"
+                                        class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
+                                        placeholder="Input text" value="" disabled>
                                 </div>
                                 <div class="mt-3">
                                     <label>地區</label>
@@ -1445,13 +1446,14 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="col-span-12 xl:col-span-6">
                                 <div>
                                     <label>電郵</label>
-                                    <input type="text" class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
-                                        placeholder="Input text" value="morganfreeman@left4code.com" disabled>
+                                    <input id="profile_email_input" type="text"
+                                        class="input w-full border bg-gray-100 cursor-not-allowed mt-2"
+                                        placeholder="Input text" value="" disabled>
                                 </div>
                                 <div class="mt-3">
                                     <label>名字</label>
-                                    <input type="text" class="input w-full border mt-2" placeholder="Input text"
-                                        value="Morgan Freeman" disabled>
+                                    <input id="profile_realname_input" type="text" class="input w-full border mt-2"
+                                        placeholder="Input text" value="">
                                 </div>
                                 <div class="mt-3">
                                     <label>身份證明文件</label>
@@ -1567,7 +1569,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 if (photoURL) {
                     document.getElementById('propicpreview').src = 'awsdownload/' + photoURL
                 }
-
+                document.getElementById('profile_displayname_input').value = displayName
+                document.getElementById('profile_email_input').value = email
                 document.getElementById('shownamediv').innerHTML = displayName
                 document.getElementById('showemaildiv').innerHTML = email
                 console.log(user)
