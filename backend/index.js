@@ -65,6 +65,11 @@ app.get('/awsdownload/:key', (req, res) => {
     awsapi.getphoto(req.params.key, req, res)
 })
 
+app.post('/cvupload', (req, res, next) => {
+    // console.log(req.files)
+    awsapi.cvupload(req, res, next)
+})
+
 
 app.post('/awscreatedata', (req, res) => {
     console.log(req.body)

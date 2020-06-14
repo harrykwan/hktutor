@@ -60,7 +60,7 @@ function getphotofroms3(x, req, res) {
 function uploadroute(req, res, next) {
     // This grabs the additional parameters so in this case passing in
     // "element1" with a value.
-    const element1 = req.body.element1;
+    // const element1 = req.body.element1;
 
     var busboy = new Busboy({
         headers: req.headers
@@ -71,6 +71,25 @@ function uploadroute(req, res, next) {
         console.log('Upload finished');
         // console.log(req.file)
         const file = req.files.myfile1;
+        // console.log(file);
+
+        // Begins the upload to the AWS S3
+        uploadToS3(file, res);
+    });
+
+    req.pipe(busboy);
+}
+
+function cvupload(req, res, next) {
+    var busboy = new Busboy({
+        headers: req.headers
+    });
+
+    // The file upload has completed
+    busboy.on('finish', function () {
+        console.log('Upload finished');
+        // console.log(req.file)
+        const file = req.files.file;
         // console.log(file);
 
         // Begins the upload to the AWS S3
@@ -163,3 +182,4 @@ exports.getphoto = getphotofroms3
 exports.createtable = createtable
 exports.createitem = createitem
 exports.readitem = readitem
+exports.cvupload = cvupload
