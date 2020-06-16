@@ -57,3 +57,9 @@ function getvideoembedvideo(url) {
             }
         })
 }
+
+
+exports.upload = upload
+exports.checkupload = checkupload
+exports.getvideourl = getvideourl
+exports.getvideoembedvideo = getvideoembedvideo

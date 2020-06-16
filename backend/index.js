@@ -1,5 +1,6 @@
 const express = require('express')
 const awsapi = require('./src/awsapi.js');
+const awsapi = require('./src/vimeo.js');
 const busboy = require('connect-busboy');
 const busboyBodyParser = require('busboy-body-parser');
 const app = express()
@@ -80,5 +81,18 @@ app.get('/awsreaddata/:uid', (req, res) => {
     awsapi.readitem(req.params.uid, req, res)
 })
 
+
+app.post('/uploadtolocal', (req, res) => {
+    console.log(req.body)
+    var file = req.files.file;
+    var filename = file.filename
+    file.mv('./uploads', filename, function (err) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send('ok')
+        }
+    })
+})
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
