@@ -1,7 +1,7 @@
 const request = require('request')
 
 let Vimeo = require('vimeo').Vimeo;
-let client = new Vimeo("76d5fde2be8d470b3a4459392a77b6651d52b919", "USuwhWwQ3z4oIzBRYIwaamaP+zQJfz8gjyBOKa24ATZSOESgFhVid+jjemXzEqojq44+dNoRe2CPoJp6rAo4Ka94vpnC+xvio3XudgmbZKL1Nmdzj+B4RmWyNVIxXlzu", "USuwhWwQ3z4oIzBRYIwaamaP+zQJfz8gjyBOKa24ATZSOESgFhVid+jjemXzEqojq44+dNoRe2CPoJp6rAo4Ka94vpnC+xvio3XudgmbZKL1Nmdzj+B4RmWyNVIxXlzu");
+let client = new Vimeo("76d5fde2be8d470b3a4459392a77b6651d52b919", "USuwhWwQ3z4oIzBRYIwaamaP+zQJfz8gjyBOKa24ATZSOESgFhVid+jjemXzEqojq44+dNoRe2CPoJp6rAo4Ka94vpnC+xvio3XudgmbZKL1Nmdzj+B4RmWyNVIxXlzu", "dcbc9ee84db9560e4e2744fa5ac0cc50");
 
 
 function upload(filepath, filename, filedes) {
