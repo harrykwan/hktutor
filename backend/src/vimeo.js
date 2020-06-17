@@ -46,7 +46,8 @@ function getvideoembedvideo(url, req, res) {
         .get('https://vimeo.com/api/oembed.json?url=' + 'vimeo.com/' + url)
         .on('response', function (response) {
             console.log(response)
-            res.send('<iframe src="https://player.vimeo.com/video/' + url + '" width="640" height="480" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>')
+            // res.send('<iframe src="https://player.vimeo.com/video/' + url + '" width="640" height="480" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>')
+            res.send('https://player.vimeo.com/video/' + url)
         })
 }
 
