@@ -12,7 +12,7 @@ function upload(filepath, filename, filedes, req, res) {
         },
         function (uri) {
             console.log('Your video URI is: ' + uri);
-            const videoid = uri.split('/')[1]
+            const videoid = uri.split('/')[2]
             res.send(videoid)
         },
         function (bytes_uploaded, bytes_total) {

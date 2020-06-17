@@ -70,7 +70,7 @@ app.post('/uploadtolocal/:uid', (req, res) => {
                 console.log(err)
             } else {
                 // res.send('ok')
-                viemoapi.upload('./uploads/' + filename, filename, "testing")
+                viemoapi.upload('./uploads/' + filename, filename, "testing", req, res)
             }
         })
     } else {
