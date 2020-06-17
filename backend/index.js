@@ -1,3 +1,4 @@
+const serverless = require('serverless-http');
 const express = require('express')
 const awsapi = require('./src/awsapi.js');
 const awsapi = require('./src/vimeo.js');
@@ -95,4 +96,5 @@ app.post('/uploadtolocal', (req, res) => {
     })
 })
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+// app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+module.exports.handler = serverless(app);
