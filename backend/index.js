@@ -3,16 +3,16 @@ const awsapi = require('./src/awsapi.js');
 const viemoapi = require('./src/vimeo.js');
 const busboy = require('connect-busboy');
 const busboyBodyParser = require('busboy-body-parser');
+const fileUpload = require('express-fileupload')
 const app = express()
 const port = 80
 
 
-app.use(busboy());
 app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
-app.use(busboyBodyParser());
+
 
 
 app.use(express.static('html/public', {
@@ -58,6 +58,43 @@ app.get('/tutorpersonalinfo', (req, res) => res.sendFile('html/tutorpersonalinfo
     root: __dirname
 }))
 
+app.use(fileUpload());
+
+app.post('/uploadtolocal/:uid', (req, res) => {
+    var uid = req.params.uid;
+    var file = req.files.file;
+    if (uid && file) {
+        var filename = uid + '_' + file.name
+        file.mv('./uploads/' + filename, function (err) {
+            if (err) {
+                console.log(err)
+            } else {
+                // res.send('ok')
+                viemoapi.upload('./uploads/' + filename, filename, "testing")
+            }
+        })
+    } else {
+        res.send('error')
+    }
+
+})
+
+
+
+
+
+app.use(busboy());
+app.use(busboyBodyParser());
+
+
+
+app.get('/vimeogetembedvideo/:url', (req, res, next) => {
+    viemoapi.getvideoembedvideo(req.params.url, req, res)
+})
+
+
+
+
 app.post('/awsupload', (req, res, next) => {
     awsapi.upload(req, res, next)
 })
@@ -82,17 +119,6 @@ app.get('/awsreaddata/:uid', (req, res) => {
 })
 
 
-app.post('/uploadtolocal', (req, res) => {
-    console.log(req.body)
-    var file = req.files.file;
-    var filename = file.filename
-    file.mv('./uploads', filename, function (err) {
-        if (err) {
-            console.log(err)
-        } else {
-            res.send('ok')
-        }
-    })
-})
+
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
