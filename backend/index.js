@@ -1,10 +1,10 @@
 const express = require('express')
 const awsapi = require('./src/awsapi.js');
-const awsapi = require('./src/vimeo.js');
+const viemoapi = require('./src/vimeo.js');
 const busboy = require('connect-busboy');
 const busboyBodyParser = require('busboy-body-parser');
 const app = express()
-const port = 3000
+const port = 80
 
 
 app.use(busboy());
