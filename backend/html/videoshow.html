@@ -1,0 +1,32 @@
+<html>
+
+<body>
+    <h1>All Videos</h1>
+    <div id="showdataarea"></div>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                // console.log(this.responseText);
+                var mydata = JSON.parse(this.responseText)
+                var temphtml = ''
+                mydata.data.map(x => {
+                    console.log(x.uri)
+                    temphtml += x.embed.html
+                    // temphtml += '<iframe src="'
+                    // temphtml += 'https://player.vimeo.com' + x.uri
+                    // temphtml += '"></iframe>'
+                })
+                document.getElementById('showdataarea').innerHTML = temphtml
+            }
+        });
+
+        xhr.open("GET", "getallvideo");
+
+        xhr.send();
+    </script>
+</body>
+
+</html>

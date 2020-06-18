@@ -2,7 +2,7 @@ const request = require('request')
 
 let Vimeo = require('vimeo').Vimeo;
 let client = new Vimeo("76d5fde2be8d470b3a4459392a77b6651d52b919", "USuwhWwQ3z4oIzBRYIwaamaP+zQJfz8gjyBOKa24ATZSOESgFhVid+jjemXzEqojq44+dNoRe2CPoJp6rAo4Ka94vpnC+xvio3XudgmbZKL1Nmdzj+B4RmWyNVIxXlzu", "dcbc9ee84db9560e4e2744fa5ac0cc50");
-
+const axios = require('axios');
 
 function upload(filepath, filename, filedes, req, res, callback) {
     client.upload(
@@ -55,7 +55,27 @@ function getvideoembedvideo(url, req, res) {
         })
 }
 
-function getallvideo() {
+function getallvideo(req, res) {
+    var axios = require('axios');
+
+    var config = {
+        method: 'get',
+        url: 'https://api.vimeo.com/me/videos?fields=name,uri,embed.html&per_page=100',
+        headers: {
+            'Authorization': 'bearer dcbc9ee84db9560e4e2744fa5ac0cc50',
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.vimeo.*+json;version=3.4'
+        }
+    };
+
+    axios(config)
+        .then(function (response) {
+            // console.log(JSON.stringify(response.data));
+            res.send(response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
 }
 
@@ -66,3 +86,4 @@ exports.upload = upload
 exports.checkupload = checkupload
 exports.getvideourl = getvideourl
 exports.getvideoembedvideo = getvideoembedvideo
+exports.getallvideo = getallvideo

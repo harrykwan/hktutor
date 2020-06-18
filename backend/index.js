@@ -4,6 +4,7 @@ const viemoapi = require('./src/vimeo.js');
 const busboy = require('connect-busboy');
 const busboyBodyParser = require('busboy-body-parser');
 const fileUpload = require('express-fileupload')
+
 const app = express()
 const port = 80
 
@@ -62,6 +63,10 @@ app.get('/videoupload', (req, res) => res.sendFile('html/videoupload.html', {
     root: __dirname
 }))
 
+app.get('/videoshow', (req, res) => res.sendFile('html/videoshow.html', {
+    root: __dirname
+}))
+
 app.use(fileUpload());
 
 app.post('/uploadtolocal/:uid', (req, res) => {
@@ -101,7 +106,9 @@ app.post('/uploadtolocal/:uid', (req, res) => {
 })
 
 
-
+app.get('/getallvideo', (req, res, next) => {
+    viemoapi.getallvideo(req, res)
+})
 
 
 app.use(busboy());
