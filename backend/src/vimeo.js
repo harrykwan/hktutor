@@ -4,7 +4,7 @@ let Vimeo = require('vimeo').Vimeo;
 let client = new Vimeo("76d5fde2be8d470b3a4459392a77b6651d52b919", "USuwhWwQ3z4oIzBRYIwaamaP+zQJfz8gjyBOKa24ATZSOESgFhVid+jjemXzEqojq44+dNoRe2CPoJp6rAo4Ka94vpnC+xvio3XudgmbZKL1Nmdzj+B4RmWyNVIxXlzu", "dcbc9ee84db9560e4e2744fa5ac0cc50");
 
 
-function upload(filepath, filename, filedes, req, res) {
+function upload(filepath, filename, filedes, req, res, callback) {
     client.upload(
         filepath, {
             'name': filename,
@@ -13,7 +13,10 @@ function upload(filepath, filename, filedes, req, res) {
         function (uri) {
             console.log('Your video URI is: ' + uri);
             const videoid = uri.split('/')[2]
-            res.send(videoid)
+            if (callback)
+                callback(uri)
+            if (res)
+                res.send(videoid)
         },
         function (bytes_uploaded, bytes_total) {
             var percentage = (bytes_uploaded / bytes_total * 100).toFixed(2)
@@ -29,6 +32,7 @@ function checkupload(uri, req, res) {
     client.request('https://vimeo.com/' + uri + '?fields=transcode.status', function (error, body, status_code, headers) {
         if (body.transcode.status === 'complete') {
             console.log('Your video finished transcoding.')
+
         } else if (body.transcode.status === 'in_progress') {
             console.log('Your video is still transcoding.')
         } else {
@@ -49,6 +53,10 @@ function getvideoembedvideo(url, req, res) {
             // res.send('<iframe src="https://player.vimeo.com/video/' + url + '" width="640" height="480" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>')
             res.send('https://player.vimeo.com/video/' + url)
         })
+}
+
+function getallvideo() {
+
 }
 
 

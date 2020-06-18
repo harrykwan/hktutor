@@ -20,7 +20,7 @@ let s3bucket = new AWS.S3({
 var dynamodb = new AWS.DynamoDB();
 var docClient = new AWS.DynamoDB.DocumentClient();
 
-function uploadToS3(file, res) {
+function uploadToS3(file, res, callback) {
     s3bucket.createBucket(function () {
         var params = {
             Bucket: BUCKET_NAME,
@@ -34,9 +34,13 @@ function uploadToS3(file, res) {
             }
             console.log('success');
             console.log(data.Location);
+            if (callback) {
+                callback()
+            }
             if (res) {
                 res.send(data)
             }
+
         });
     });
 }
@@ -151,7 +155,7 @@ function createitem(item, req, res) {
 //     testdata: "testdata"
 // })
 
-function readitem(uid, req, res) {
+function readitem(uid, req, res, callback) {
     var table = "userprofiledata";
 
     var params = {
@@ -165,8 +169,13 @@ function readitem(uid, req, res) {
         if (err) {
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
+
+            if (callback) {
+                callback(data)
+            }
             if (res) {
                 res.send(data)
+
             }
             console.log("GetItem succeeded:", data);
         }

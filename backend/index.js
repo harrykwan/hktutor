@@ -58,19 +58,40 @@ app.get('/tutorpersonalinfo', (req, res) => res.sendFile('html/tutorpersonalinfo
     root: __dirname
 }))
 
+app.get('/videoupload', (req, res) => res.sendFile('html/videoupload.html', {
+    root: __dirname
+}))
+
 app.use(fileUpload());
 
 app.post('/uploadtolocal/:uid', (req, res) => {
     var uid = req.params.uid;
     var file = req.files.file;
     if (uid && file) {
+        const viemofilename = file.name
         var filename = uid + '_' + file.name
         file.mv('./uploads/' + filename, function (err) {
             if (err) {
                 console.log(err)
             } else {
                 // res.send('ok')
-                viemoapi.upload('./uploads/' + filename, filename, "testing", req, res)
+                viemoapi.upload('./uploads/' + filename, viemofilename, "", undefined, undefined, function (uri) {
+                    awsapi.readitem(uid, undefined, undefined,
+                        function (data) {
+                            console.log(data)
+                            var tempitem = data.Item
+                            console.log(tempitem)
+                            if (tempitem.videolist) {
+                                tempitem.videolist.push(uri)
+                            } else {
+                                tempitem.videolist = [uri]
+                            }
+
+                            console.log(tempitem)
+                            awsapi.createitem(tempitem, req, res)
+                        })
+
+                })
             }
         })
     } else {
