@@ -103,7 +103,7 @@ function cvupload(req, res, next) {
     req.pipe(busboy);
 }
 
-function createtable() {
+function createtable_userprofiledata() {
     var params = {
         TableName: "userprofiledata",
         KeySchema: [{
@@ -129,8 +129,35 @@ function createtable() {
     });
 }
 
-function createitem(item, req, res) {
-    var table = "userprofiledata";
+function createtable_videodata() {
+    var params = {
+        TableName: "videodata",
+        KeySchema: [{
+            AttributeName: "vid",
+            KeyType: "HASH"
+        }],
+        AttributeDefinitions: [{
+            AttributeName: "vid",
+            AttributeType: "S"
+        }],
+        ProvisionedThroughput: {
+            ReadCapacityUnits: 10,
+            WriteCapacityUnits: 10
+        }
+    };
+
+    dynamodb.createTable(params, function (err, data) {
+        if (err) {
+            console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
+        }
+    });
+}
+
+// createtable_videodata()
+
+function createitem(table, item, req, res) {
 
     var params = {
         TableName: table,
@@ -155,8 +182,7 @@ function createitem(item, req, res) {
 //     testdata: "testdata"
 // })
 
-function readitem(uid, req, res, callback) {
-    var table = "userprofiledata";
+function readitem(table, uid, req, res, callback) {
 
     var params = {
         TableName: table,
@@ -185,10 +211,89 @@ function readitem(uid, req, res, callback) {
 // readitem('testuid')
 
 
+
+function awsquery(params) {
+    var params = {
+        TableName: "Movies",
+        KeyConditionExpression: "#yr = :yyyy",
+        ExpressionAttributeNames: {
+            "#yr": "year"
+        },
+        ExpressionAttributeValues: {
+            ":yyyy": 1985
+        }
+    };
+    var params = {
+        TableName: "Movies",
+        ProjectionExpression: "#yr, title, info.genres, info.actors[0]",
+        KeyConditionExpression: "#yr = :yyyy and title between :letter1 and :letter2",
+        ExpressionAttributeNames: {
+            "#yr": "year"
+        },
+        ExpressionAttributeValues: {
+            ":yyyy": 1992,
+            ":letter1": "A",
+            ":letter2": "L"
+        }
+    };
+
+    docClient.query(params, function (err, data) {
+        if (err) {
+            console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Query succeeded.");
+            data.Items.forEach(function (item) {
+                console.log(" -", item);
+            });
+        }
+    });
+}
+
+
+function awsscan(params, callback) {
+    var params = {
+        TableName: "Movies",
+        ProjectionExpression: "#yr, title, info.rating",
+        FilterExpression: "#yr between :start_yr and :end_yr",
+        ExpressionAttributeNames: {
+            "#yr": "year",
+        },
+        ExpressionAttributeValues: {
+            ":start_yr": 1950,
+            ":end_yr": 1959
+        }
+    };
+    docClient.scan(params, onScan);
+
+    function onScan(err, data) {
+        if (err) {
+            console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            // print all the movies
+            console.log("Scan succeeded.");
+            callback(data)
+            data.Items.forEach(function (result) {
+                console.log(result);
+            });
+
+            // continue scanning if we have more movies, because
+            // scan can retrieve a maximum of 1MB of data
+            if (typeof data.LastEvaluatedKey != "undefined") {
+                console.log("Scanning for more...");
+                params.ExclusiveStartKey = data.LastEvaluatedKey;
+                docClient.scan(params, onScan);
+            }
+        }
+    }
+}
+
+
 exports.uploadToS3 = uploadToS3
 exports.upload = uploadroute
 exports.getphoto = getphotofroms3
-exports.createtable = createtable
+// exports.createtable = createtable
 exports.createitem = createitem
 exports.readitem = readitem
 exports.cvupload = cvupload
+exports.awsquery = awsquery
+exports.awsscan = awsscan

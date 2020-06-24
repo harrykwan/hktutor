@@ -67,6 +67,9 @@ app.get('/videoshow', (req, res) => res.sendFile('html/videoshow.html', {
     root: __dirname
 }))
 
+
+
+
 app.use(fileUpload());
 
 app.post('/uploadtolocal/:uid', (req, res) => {
@@ -81,7 +84,7 @@ app.post('/uploadtolocal/:uid', (req, res) => {
             } else {
                 // res.send('ok')
                 viemoapi.upload('./uploads/' + filename, viemofilename, "", undefined, undefined, function (uri) {
-                    awsapi.readitem(uid, undefined, undefined,
+                    awsapi.readitem("userprofiledata", uid, undefined, undefined,
                         function (data) {
                             console.log(data)
                             var tempitem = data.Item
@@ -93,7 +96,7 @@ app.post('/uploadtolocal/:uid', (req, res) => {
                             }
 
                             console.log(tempitem)
-                            awsapi.createitem(tempitem, req, res)
+                            awsapi.createitem("userprofiledata", tempitem, req, res)
                         })
 
                 })
@@ -139,13 +142,25 @@ app.post('/cvupload', (req, res, next) => {
 
 app.post('/awscreatedata', (req, res) => {
     console.log(req.body)
-    awsapi.createitem(req.body, req, res)
+    awsapi.createitem("userprofiledata", req.body, req, res)
 })
 
 app.get('/awsreaddata/:uid', (req, res) => {
-    awsapi.readitem(req.params.uid, req, res)
+    awsapi.readitem("userprofiledata", req.params.uid, req, res)
 })
 
+
+
+app.post('/updatevideodata', (req, res, next) => {
+    console.log(req.body)
+    awsapi.createitem("videodata", req.body, req, res)
+})
+
+app.get('/readvideodata/:vid', (req, res) => {
+    awsapi.readitem("videodata", req.params.vid, req, res)
+})
+
+app.get('')
 
 
 

@@ -1,5 +1,13 @@
 <html>
 
+<head>
+    <style>
+        iframe {
+            width: 100%;
+        }
+    </style>
+</head>
+
 <body>
     <h1>All Videos</h1>
     <div id="showdataarea"></div>
@@ -15,9 +23,6 @@
                 mydata.data.map(x => {
                     console.log(x.uri)
                     temphtml += x.embed.html
-                    // temphtml += '<iframe src="'
-                    // temphtml += 'https://player.vimeo.com' + x.uri
-                    // temphtml += '"></iframe>'
                 })
                 document.getElementById('showdataarea').innerHTML = temphtml
             }
