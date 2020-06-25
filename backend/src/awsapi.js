@@ -212,57 +212,26 @@ function readitem(table, uid, req, res, callback) {
 
 
 
-function awsquery(params) {
-    var params = {
-        TableName: "Movies",
-        KeyConditionExpression: "#yr = :yyyy",
-        ExpressionAttributeNames: {
-            "#yr": "year"
-        },
-        ExpressionAttributeValues: {
-            ":yyyy": 1985
-        }
-    };
-    var params = {
-        TableName: "Movies",
-        ProjectionExpression: "#yr, title, info.genres, info.actors[0]",
-        KeyConditionExpression: "#yr = :yyyy and title between :letter1 and :letter2",
-        ExpressionAttributeNames: {
-            "#yr": "year"
-        },
-        ExpressionAttributeValues: {
-            ":yyyy": 1992,
-            ":letter1": "A",
-            ":letter2": "L"
-        }
-    };
+function awsquery(params, callback) {
 
     docClient.query(params, function (err, data) {
         if (err) {
             console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
         } else {
             console.log("Query succeeded.");
-            data.Items.forEach(function (item) {
-                console.log(" -", item);
-            });
+            if (callback) {
+                callback(data)
+            }
+            // data.Items.forEach(function (item) {
+            //     console.log(" -", item);
+            // });
         }
     });
 }
 
 
 function awsscan(params, callback) {
-    var params = {
-        TableName: "Movies",
-        ProjectionExpression: "#yr, title, info.rating",
-        FilterExpression: "#yr between :start_yr and :end_yr",
-        ExpressionAttributeNames: {
-            "#yr": "year",
-        },
-        ExpressionAttributeValues: {
-            ":start_yr": 1950,
-            ":end_yr": 1959
-        }
-    };
+
     docClient.scan(params, onScan);
 
     function onScan(err, data) {
@@ -271,10 +240,11 @@ function awsscan(params, callback) {
         } else {
             // print all the movies
             console.log("Scan succeeded.");
-            callback(data)
-            data.Items.forEach(function (result) {
-                console.log(result);
-            });
+            if (callback)
+                callback(data)
+            // data.Items.forEach(function (result) {
+            //     console.log(result);
+            // });
 
             // continue scanning if we have more movies, because
             // scan can retrieve a maximum of 1MB of data

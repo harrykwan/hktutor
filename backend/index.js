@@ -67,6 +67,9 @@ app.get('/videoshow', (req, res) => res.sendFile('html/videoshow.html', {
     root: __dirname
 }))
 
+app.get('/videohome', (req, res) => res.sendFile('html/videohome.html', {
+    root: __dirname
+}))
 
 
 
@@ -160,7 +163,19 @@ app.get('/readvideodata/:vid', (req, res) => {
     awsapi.readitem("videodata", req.params.vid, req, res)
 })
 
-app.get('')
+app.get('/awsquerydata', (req, res) => {
+    awsapi.awsquery(req.body, function (data) {
+        res.send(data)
+    })
+})
+
+
+app.get('/awsscandata', (req, res) => {
+    awsapi.awsscan(req.body, function (data) {
+        res.send(data)
+    })
+})
+
 
 
 
