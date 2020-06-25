@@ -49,7 +49,7 @@ app.get('/studentprofile', (req, res) => res.sendFile('html/studentprofile.html'
     root: __dirname
 }))
 
-app.get('/home', (req, res) => res.sendFile('html/index.html', {
+app.get('/home', (req, res) => res.sendFile('html/home.html', {
     root: __dirname
 }))
 app.get('/emailconfirm', (req, res) => res.sendFile('html/emailconfirm.html', {
