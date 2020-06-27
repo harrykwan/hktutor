@@ -157,6 +157,65 @@ function createtable_videodata() {
 
 // createtable_videodata()
 
+
+
+function createtable_videocomment() {
+    var params = {
+        TableName: "videocomment",
+        KeySchema: [{
+            AttributeName: "vid",
+            KeyType: "HASH"
+        }],
+        AttributeDefinitions: [{
+            AttributeName: "vid",
+            AttributeType: "S"
+        }],
+        ProvisionedThroughput: {
+            ReadCapacityUnits: 10,
+            WriteCapacityUnits: 10
+        }
+    };
+
+    dynamodb.createTable(params, function (err, data) {
+        if (err) {
+            console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
+        }
+    });
+}
+
+// createtable_videocomment()
+
+function createtable_videodata() {
+    var params = {
+        TableName: "videodata",
+        KeySchema: [{
+            AttributeName: "vid",
+            KeyType: "HASH"
+        }],
+        AttributeDefinitions: [{
+            AttributeName: "vid",
+            AttributeType: "S"
+        }],
+        ProvisionedThroughput: {
+            ReadCapacityUnits: 10,
+            WriteCapacityUnits: 10
+        }
+    };
+
+    dynamodb.createTable(params, function (err, data) {
+        if (err) {
+            console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
+        }
+    });
+}
+
+
+
+
 function createitem(table, item, req, res) {
 
     var params = {

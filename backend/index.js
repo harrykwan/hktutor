@@ -71,6 +71,10 @@ app.get('/videohome', (req, res) => res.sendFile('html/videohome.html', {
     root: __dirname
 }))
 
+app.get('/video', (req, res) => res.sendFile('html/singlevideo.html', {
+    root: __dirname
+}))
+
 
 
 app.use(fileUpload());
