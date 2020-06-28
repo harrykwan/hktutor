@@ -79,6 +79,12 @@ app.get('/video', (req, res) => res.sendFile('html/singlevideo.html', {
 
 app.use(fileUpload());
 
+/**
+ * This function will accept details about a video
+ * and upload it to vimeo
+ * @param  {string} uid the uid of the video filename
+ * @param  {string} file the name of the video filename
+ */
 app.post('/uploadtolocal/:uid', (req, res) => {
     var uid = req.params.uid;
     var file = req.files.file;

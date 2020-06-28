@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.3",
     "formidable": "^1.2.2",
+    "jsdoc": "^3.6.4",
     "nodemon": "^2.0.4",
     "request": "^2.88.2",
     "vimeo": "^2.1.1"
