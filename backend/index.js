@@ -1,6 +1,7 @@
 const express = require('express')
 const awsapi = require('./src/awsapi.js');
 const viemoapi = require('./src/vimeo.js');
+const stripeapi = require('./src/stripe.js')
 const busboy = require('connect-busboy');
 const busboyBodyParser = require('busboy-body-parser');
 const fileUpload = require('express-fileupload')
@@ -74,6 +75,18 @@ app.get('/videohome', (req, res) => res.sendFile('html/videohome.html', {
 app.get('/video', (req, res) => res.sendFile('html/singlevideo.html', {
     root: __dirname
 }))
+
+app.get('/teststripe', (req, res) => res.sendFile('html/teststripe.html', {
+    root: __dirname
+}))
+
+app.get('/stripesecret', async (req, res) => {
+    stripeapi.getclientsecret(function (client_secret) {
+        res.json({
+            client_secret: client_secret
+        });
+    })
+});
 
 
 

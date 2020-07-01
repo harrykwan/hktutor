@@ -24,6 +24,7 @@
     "jsdoc": "^3.6.4",
     "nodemon": "^2.0.4",
     "request": "^2.88.2",
+    "stripe": "^8.67.0",
     "vimeo": "^2.1.1"
   },
   "devDependencies": {
