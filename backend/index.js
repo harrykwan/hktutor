@@ -76,7 +76,7 @@ app.get('/video', (req, res) => res.sendFile('html/singlevideo.html', {
     root: __dirname
 }))
 
-app.get('/teststripe', (req, res) => res.sendFile('html/teststripe.html', {
+app.get('/teststripe', (req, res) => res.sendFile('html/payment.html', {
     root: __dirname
 }))
 

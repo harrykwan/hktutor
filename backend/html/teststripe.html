@@ -17,26 +17,16 @@
         <button id="submit">Pay</button>
     </form>
     <script>
-        // var stripe = Stripe('pk_test_6D9Nwy7GrtNagdku5QKtuS0500HuAdHmkj');
-        var stripe = Stripe('pk_live_51H0UNiI2wlVhRFhOulA3gl22X5UiSeWyJuKkIW750CNQenRlgbg9cOui5YWtOpP3DLrNgNmVQ1OCv8vvrHYRbpPH0043PUKYiM');
+        var stripe = Stripe('pk_test_6D9Nwy7GrtNagdku5QKtuS0500HuAdHmkj');
         var elements = stripe.elements();
         var style = {
+            hidePostalCode: true,
             base: {
-                iconColor: '#666EE8',
-                color: '#31325F',
-                lineHeight: '40px',
-                fontWeight: 300,
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSize: '15px',
-
-                '::placeholder': {
-                    color: '#CFD7E0',
-                },
+                color: "#32325d"
             }
         };
 
         var card = elements.create("card", {
-            hidePostalCode: true,
             style: style
         });
         card.mount("#card-element");
@@ -47,8 +37,7 @@
             if (error) {
                 displayError.textContent = error.message;
             } else {
-                // displayError.textContent = '';
-                alert('Thank you for your purchase! HKD$4.00 has been deducted from your credit card.')
+                displayError.textContent = '';
             }
         });
         var form = document.getElementById('payment-form');
@@ -81,8 +70,6 @@
                         }
                     }
                 });
-
-                return false
             });
         });
     </script>
