@@ -17,7 +17,8 @@
         <button id="submit">Pay</button>
     </form>
     <script>
-        var stripe = Stripe('pk_test_6D9Nwy7GrtNagdku5QKtuS0500HuAdHmkj');
+        // var stripe = Stripe('pk_test_6D9Nwy7GrtNagdku5QKtuS0500HuAdHmkj');
+        var stripe = Stripe('pk_live_51H0UNiI2wlVhRFhOulA3gl22X5UiSeWyJuKkIW750CNQenRlgbg9cOui5YWtOpP3DLrNgNmVQ1OCv8vvrHYRbpPH0043PUKYiM');
         var elements = stripe.elements();
         var style = {
             base: {
@@ -46,7 +47,8 @@
             if (error) {
                 displayError.textContent = error.message;
             } else {
-                displayError.textContent = '';
+                // displayError.textContent = '';
+                alert('Thank you for your purchase! HKD$4.00 has been deducted from your credit card.')
             }
         });
         var form = document.getElementById('payment-form');
