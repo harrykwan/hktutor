@@ -1264,7 +1264,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="intro-y box mt-5">
                     <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
                         <h2 class="font-medium text-base mr-auto">
-                            Radio
+                            Short Question
                         </h2>
 
                     </div>
@@ -1280,6 +1280,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <!-- END: Radio Button -->
             </div>
+            <button onclick="submitanswer(this)" class="button w-24 mr-1 mb-2 bg-theme-7 text-white">Submit</button>
         </div>
     </div>
     <!-- END: Content -->
@@ -1289,29 +1290,53 @@ License: You must have a valid license purchased only from themeforest(the above
     <script>
         var myquestiondata = [{
             type: 'mc',
-            question: 'Which of the following are studied in biology?',
-            descrip: ` (1) the structure of cells<br>
-                                (2) the interrelationships between organisms and their environment<br>
-                                (3) the classification of organisms<br>`,
-            choice: ["A (1) and (2) only", "B (1) and (3) onlyn", "C (2) and (3) only", "D (1), (2) and (3)"]
+            question: 'Which of the following statements is correct?',
+            descrip: ``,
+            choice: ["A.	There are four lines of defence in our body defence mechanisms.",
+                "B.	Non-specific internal defence is the last line of defence.",
+                "C.	Chemical barrier is a type of natural barriers.",
+                "D.	Inflammatory response is a type of specific defence mechanisms."
+            ],
+            tag: ["body defence mechanisms"],
+            answer: 3 //1-4
+        }, {
+            type: 'mc',
+            question: 'Which of the following is / are the type(s) of body defence mechanism?',
+            descrip: `(1)	blood clotting<br>
+                        (2)	secretion of gastric juice<br>
+                        (3)	phagocytosis<br>
+                        (4)	mucus production<br>
+                        `,
+            choice: ["A.	(3) only", "B.	(3) and (4) only", "C.	(1), (3) and (4) only",
+                "D.	(1), (2), (3) and (4)"
+            ],
+            tag: ["body defence mechanisms"],
+            answer: 4 //1-4
+        }, {
+            type: 'mc',
+            question: 'Which of the following contain(s) lysozyme?',
+            descrip: ``,
+            choice: ["A.	tears", "B.	sebum", "C.	mucus", "D.	blood"],
+            tag: ["body defence mechanisms"],
+            answer: 1 //1-4
         }]
 
-        function genmcchoice(x) {
+        function genmcchoice(x, y) {
             var temphtml = ''
             for (var j = 0; j < x.length; j++) {
                 temphtml += `<div class="flex items-center text-gray-700 mt-2">
                                     <input type="radio" class="input border mr-2" id="vertical-radio-daniel-craig"
-                                        name="vertical_radio_button" value="vertical-radio-daniel-craig">
-                                    <label class="cursor-pointer select-none" for="vertical-radio-daniel-craig">` +
+                                        name="` + y + `" value="vertical-radio-daniel-craig">
+                                    <span class="cursor-pointer select-none" for="vertical-radio-daniel-craig">` +
                     x[j] +
-                    `</label>
+                    `</span>
                                 </div>`
             }
             return temphtml
         }
 
 
-        function genmcquestion(question, descrip, choice) {
+        function genmcquestion(question, descrip, choice, questionid) {
             var temphtml = ` <div class="intro-y box mt-5">
                     <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
                         <h2 class="font-medium text-base mr-auto">
@@ -1323,9 +1348,9 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                     <div class="p-5" id="radio">
                         <div class="preview">
-                            <div>
+                            <div class='answerarea'>
                                
-                                ` + descrip + genmcchoice(choice) + `
+                                ` + descrip + genmcchoice(choice, questionid) + `
 
                             </div>
 
@@ -1342,7 +1367,7 @@ License: You must have a valid license purchased only from themeforest(the above
             for (var j = 0; j < myquestiondata.length; j++) {
                 if (myquestiondata[j].type == 'mc') {
                     temphtml += genmcquestion(myquestiondata[j].question,
-                        myquestiondata[j].descrip, myquestiondata[j].choice)
+                        myquestiondata[j].descrip, myquestiondata[j].choice, "question" + j)
                 }
             }
             document.getElementById('questionarea').innerHTML = temphtml
@@ -1350,6 +1375,82 @@ License: You must have a valid license purchased only from themeforest(the above
         }
 
         startpage()
+
+        var studentanswer
+
+        function submitanswer(submitbutton) {
+            submitbutton.disabled = true
+            submitbutton.hidden = true
+            getstudentanswer()
+            showanswer()
+        }
+
+        function getstudentanswer() {
+            var answerarea = document.getElementsByClassName("answerarea")
+            studentanswer = []
+            for (var j = 0; j < answerarea.length; j++) {
+                var tempinputs = answerarea[j].getElementsByTagName('input')
+                var tempanswer = -1
+                for (var k = 0; k < tempinputs.length; k++) {
+                    if (tempinputs[k].checked) {
+                        tempanswer = k + 1
+                        break
+                    }
+                }
+                studentanswer.push(tempanswer)
+            }
+
+        }
+
+
+        myscore = {}
+
+        function showanswer() {
+            var answerarea = document.getElementsByClassName("answerarea")
+            var correctdialog =
+                '<br><br><div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-9 text-white"> <i data-feather="alert-triangle" class="w-6 h-6 mr-2"></i>Correct<i data-feather="x" class="w-4 h-4 ml-auto"></i> </div>'
+            var wrongdialog =
+                '<br><br><div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-6 text-white"> <i data-feather="alert-octagon" class="w-6 h-6 mr-2"></i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle w-6 h-6 mr-2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Wrong Answer <i data-feather="x" class="w-4 h-4 ml-auto"></i> </div>'
+            for (var j = 0; j < answerarea.length; j++) {
+                if (studentanswer[j] && answerarea[j]) {
+                    var questiontag = myquestiondata[j].tag
+
+                    if (myquestiondata[j].answer == studentanswer[j]) {
+                        //correct
+                        // for (var k = 0; k < questiontag.length; j++) {
+                        //     if (!myscore[questiontag[k]])
+                        //         myscore[questiontag[k]] = {}
+                        //     if (myscore[questiontag[k]].correct)
+                        //         myscore[questiontag[k]].correct += 1
+                        //     else
+                        //         myscore[questiontag[k]].correct = 1
+                        // }
+                        answerarea[j].getElementsByTagName('input')[studentanswer[j] - 1].parentNode.style.border =
+                            "2px solid green"
+                        answerarea[j].innerHTML += correctdialog
+                    } else {
+                        //wrong
+                        // for (var k = 0; k < questiontag.length; j++) {
+                        //     if (!myscore[questiontag[k]])
+                        //         myscore[questiontag[k]] = {}
+                        //     if (myscore[questiontag[k]].wrong)
+                        //         myscore[questiontag[k]].wrong += 1
+                        //     else
+                        //         myscore[questiontag[k]].wrong = 1
+                        // }
+
+                        answerarea[j].getElementsByTagName('input')[studentanswer[j] - 1].parentNode.style.border =
+                            "2px solid red"
+                        answerarea[j].getElementsByTagName('input')[myquestiondata[j].answer - 1].parentNode.style
+                            .border =
+                            "2px solid green"
+                        answerarea[j].innerHTML += wrongdialog
+                    }
+                    answerarea[j].getElementsByTagName('input')[studentanswer[j] - 1].checked = true
+                }
+
+            }
+        }
     </script>
     <!-- END: JS Assets-->
 </body>
