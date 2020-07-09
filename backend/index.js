@@ -80,6 +80,12 @@ app.get('/teststripe', (req, res) => res.sendFile('html/payment.html', {
     root: __dirname
 }))
 
+
+app.get('/testbank', (req, res) => res.sendFile('html/testbank.html', {
+    root: __dirname
+}))
+
+
 app.get('/stripesecret', async (req, res) => {
     stripeapi.getclientsecret(function (client_secret) {
         res.json({

@@ -1,23 +1,23 @@
 import summernote from '../../node_modules/summernote/dist/summernote-lite.js'
 import summernoteCss from '../../node_modules/summernote/dist/summernote-lite.css'
 
-(function($) { 
+(function ($) {
     "use strict";
-        
+
     // Summernote
-    $('.summernote').each(function() {
+    $('.summernote').each(function () {
         let options = {
-            placeholder: 'Hello stand alone ui',
+            placeholder: 'type your answer here',
             tabsize: 2,
             height: 120,
             toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'italic']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']]
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'italic']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
             ]
         }
 
