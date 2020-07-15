@@ -1281,22 +1281,38 @@ License: You must have a valid license purchased only from themeforest(the above
 
             <div class="intro-y flex items-center mt-8">
                 <h2 class="text-lg font-medium mr-auto">
-                    Upload Videos
+                    Video Details
                 </h2>
             </div>
-            <div id="uploadformarea">
+            <br>
+            <img id="videopreview">
+            <br>
+            <div> <input id="titleinput" type="text" class="input w-full border mt-2" placeholder="Video Title">
+            </div><br>
 
-                <form data-single="true" action="/uploadtolocal" class="dropzone border-gray-200 border-dashed">
-                    <div class="fallback"> <input name="file" type="file" /> </div>
-                    <div class="dz-message" data-dz-message>
-                        <div class="text-lg font-medium">Drop files here or click to upload.</div>
-                        <div class="text-gray-600"> </div>
-                    </div>
-                </form>
-
-            </div>
+            <div> <input id="descripinput" type="text" class="input w-full border mt-2" placeholder="Video description">
+            </div><br>
 
 
+            <div> <input id="taginput" type="text" class="input w-full border mt-2" placeholder="Video Tag">
+            </div><br>
+
+            <div class="mt-2"> <select id="subjectinput" class="input w-full border mr-2">
+                    <option name="中文">中文</option>
+                    <option name="英文">英文</option>
+                    <option name="數學">數學</option>
+                    <option name="通識">通識</option>
+                </select> </div><br>
+
+            <div class="relative mt-2"> <input id="priceinput" type="text" class="input pr-12 w-full border col-span-4"
+                    placeholder="Price">
+                <div
+                    class="absolute top-0 right-0 rounded-r w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600">
+                    .00</div>
+            </div><br>
+
+            <button onclick="submitvideodetails()" type="button"
+                class="button bg-theme-1 text-white mt-5">Submit</button>
 
 
 
@@ -1311,14 +1327,19 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <script>
         var allfileres
-
-        function createform(uid) {
-            console.log(uid)
-            // console.log(document.getElementById('uploadformarea').getElementsByTagName('form')[0].action)
-            document.getElementById('uploadformarea').getElementsByTagName('form')[0].action += '/' + uid
-            addscript("dist/js/app.js")
-
+        var url = new URL(window.location.href);
+        var searchParams = new URLSearchParams(url.search);
+        if (!searchParams.get("vid")) {
+            alert('invalid video id')
+            window.location.href = "home";
         }
+        var vid = searchParams.get("vid")
+        var videophotourl
+        getvideophoto(vid, function (x) {
+            videophotourl = x.pictures.sizes[3].link_with_play_button
+            document.getElementById('videopreview').src = videophotourl
+            console.log(videophotourl)
+        })
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
@@ -1333,7 +1354,6 @@ License: You must have a valid license purchased only from themeforest(the above
                 var providerData = user.providerData;
 
                 console.log(user)
-                createform(uid)
 
             } else {
                 // User is signed out.
@@ -1342,15 +1362,6 @@ License: You must have a valid license purchased only from themeforest(the above
             }
         });
 
-
-        function addscript(x) {
-            let script = document.createElement('script');
-            script.src = x;
-
-            script.async = false;
-
-            document.body.append(script);
-        }
 
         function updatevideodata(mydata) {
             var data = JSON.stringify(mydata);
@@ -1361,19 +1372,64 @@ License: You must have a valid license purchased only from themeforest(the above
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
                     console.log(this.responseText);
+                    alert('Video Details Updated')
                 }
             });
 
-            xhr.open("POST", "http://localhost:80/updatevideodata");
+            xhr.open("POST", "updatevideodata");
             xhr.setRequestHeader("Content-Type", "application/json");
 
             xhr.send(data);
+        }
+
+        function submitvideodetails() {
+
+            var titleinput = document.getElementById('titleinput').value
+            var descripinput = document.getElementById('descripinput').value
+            var taginput = document.getElementById('taginput').value
+            var subjectinput = document.getElementById('subjectinput').value
+            var tags = taginput.split(' ').map(x => {
+                if (x)
+                    return x
+            })
+
+            var tempdata = {
+                title: titleinput,
+                descrip: descripinput,
+                tag: tags,
+                subject: subjectinput,
+                photourl: videophotourl
+            }
+
+            console.log(tempdata)
+
+            tempdata.vid = vid
+            updatevideodata(tempdata)
+
+
+        }
+
+        function getvideophoto(vid, callback) {
+            console.log(vid)
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(JSON.parse(this.responseText));
+                    callback(JSON.parse(this.responseText))
+                }
+            });
+
+            xhr.open("GET", "getvideodata/" + vid);
+
+            xhr.send();
         }
     </script>
 
 
 
-    <!-- <script src="dist/js/app.js"></script> -->
+    <script src="dist/js/app.js"></script>
     <!-- END: JS Assets-->
 </body>
 

@@ -89,6 +89,27 @@ function getallvideo(req, res) {
 
 }
 
+function getvideodata(vid, callback) {
+    console.log(vid)
+    var request = require('request');
+    var options = {
+        'method': 'GET',
+        'url': 'https://api.vimeo.com/videos/' + vid,
+        'headers': {
+            'Authorization': 'bearer dcbc9ee84db9560e4e2744fa5ac0cc50',
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.vimeo.*+json;version=3.4'
+        }
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        // console.log(response.body);
+        console.log('ok')
+        callback(response.body)
+    });
+
+}
+
 
 
 
@@ -97,3 +118,4 @@ exports.checkupload = checkupload
 exports.getvideourl = getvideourl
 exports.getvideoembedvideo = getvideoembedvideo
 exports.getallvideo = getallvideo
+exports.getvideodata = getvideodata

@@ -64,6 +64,10 @@ app.get('/videoupload', (req, res) => res.sendFile('html/videoupload.html', {
     root: __dirname
 }))
 
+app.get('/videoupdate', (req, res) => res.sendFile('html/videoupdate.html', {
+    root: __dirname
+}))
+
 app.get('/videoshow', (req, res) => res.sendFile('html/videoshow.html', {
     root: __dirname
 }))
@@ -145,6 +149,11 @@ app.get('/getallvideo', (req, res, next) => {
     viemoapi.getallvideo(req, res)
 })
 
+app.get('/getvideodata/:vid', (req, res, next) => {
+    viemoapi.getvideodata(req.params.vid, function (data) {
+        res.send(data)
+    })
+})
 
 app.use(busboy());
 app.use(busboyBodyParser());
@@ -154,6 +163,8 @@ app.use(busboyBodyParser());
 app.get('/vimeogetembedvideo/:url', (req, res, next) => {
     viemoapi.getvideoembedvideo(req.params.url, req, res)
 })
+
+
 
 
 
