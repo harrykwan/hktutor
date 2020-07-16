@@ -1038,6 +1038,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         var myvideolist = {}
         var allvideolist = {}
+        var typelist = []
 
         function startpage() {
             getpurchaselist(function (purchaselist) {
@@ -1057,38 +1058,47 @@ License: You must have a valid license purchased only from themeforest(the above
                         })
                     })
                     console.log(myvideolist)
+                    for (var j in myvideolist) {
+                        typelist.push({
+                            typename: j,
+                            typenum: myvideolist[j].length
+                        })
+                    }
+                    document.getElementById("videotypearea").innerHTML = gentypelist(typelist)
+                    document.getElementById('videolistarea').innerHTML = genvideolist(myvideolist[
+                        nowtypename])
                 })
             })
 
-            document.getElementById("videotypearea").innerHTML = gentypelist([{
-                typename: "中文",
-                typenum: 0
-            }, {
-                typename: "英文",
-                typenum: 0
-            }, {
-                typename: "數學",
-                typenum: 0
-            }, {
-                typename: "通識",
-                typenum: 0
-            }])
+            // document.getElementById("videotypearea").innerHTML = gentypelist([{
+            //     typename: "中文",
+            //     typenum: 0
+            // }, {
+            //     typename: "英文",
+            //     typenum: 0
+            // }, {
+            //     typename: "數學",
+            //     typenum: 0
+            // }, {
+            //     typename: "通識",
+            //     typenum: 0
+            // }])
 
-            // queryvideotype(nowtypename, function (x) {
+            // // queryvideotype(nowtypename, function (x) {
 
-            // })
+            // // })
 
 
-            document.getElementById('videolistarea').innerHTML = genvideolist([{
-                videoname: "testing",
-                videobody: "<img src='https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png'>"
-            }, {
-                videoname: "testing2",
-                videobody: "<img src='https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png'>"
-            }, {
-                videoname: "testing3",
-                videobody: "<img src='https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png'>"
-            }])
+            // document.getElementById('videolistarea').innerHTML = genvideolist([{
+            //     videoname: "testing",
+            //     videobody: "<img src='https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png'>"
+            // }, {
+            //     videoname: "testing2",
+            //     videobody: "<img src='https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png'>"
+            // }, {
+            //     videoname: "testing3",
+            //     videobody: "<img src='https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png'>"
+            // }])
         }
     </script>
 
