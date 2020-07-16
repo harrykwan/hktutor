@@ -210,7 +210,8 @@ app.get('/awsquerydata', (req, res) => {
 })
 
 
-app.get('/awsscandata', (req, res) => {
+app.post('/awsscandata', (req, res) => {
+    console.log(req.body)
     awsapi.awsscan(req.body, function (data) {
         res.send(data)
     })

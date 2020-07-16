@@ -24,6 +24,14 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="dist/css/app.css" />
     <!-- END: CSS Assets-->
+
+    <style>
+        .videoitem {}
+
+        .videoitem:hover {
+            transform: scale(1.5);
+        }
+    </style>
 </head>
 <!-- END: Head -->
 
@@ -1277,11 +1285,33 @@ License: You must have a valid license purchased only from themeforest(the above
     </script>
 
 
+
+    <div class="modal" id="button-modal-preview">
+        <div class="modal__content relative"> <a data-dismiss="modal" href="javascript:;"
+                class="absolute right-0 top-0 mt-3 mr-3"> <i data-feather="x" class="w-8 h-8 text-gray-500"></i> </a>
+            <div class="p-5 text-center">
+                <div class="text-3xl mt-5">Modal Example</div>
+                <div class="text-gray-600 mt-2">Modal with close button</div>
+                <div class="relative mt-2"> <input type="text" class="input pr-12 w-full border col-span-4"
+                        placeholder="Price" disabled>
+                    <div
+                        class="absolute top-0 right-0 rounded-r w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600">
+                        .00</div>
+                </div>
+            </div>
+            <div class="px-5 pb-8 text-center"> <button type="button" data-dismiss="modal"
+                    class="button w-24 bg-theme-1 text-white">Buy</button> </div>
+        </div>
+    </div>
+
     <script>
         function genitem(x) {
-            var tempitem = ` <div class="h-64 px-2">
+            var tempitem =
+                ` <div class="h-64 px-2">
                             <div class="h-full image-fit rounded-md overflow-hidden">
-                                <img alt="Midone Tailwind HTML Admin Template" src="` + x + `" />
+                                <a href="javascript:;" data-toggle="modal" data-target="#button-modal-preview" ><img class="videoitem" alt="Midone Tailwind HTML Admin Template" src="` +
+                x + `" />
+                                </a>
                             </div>
                         </div>`
             return tempitem
@@ -1298,18 +1328,18 @@ License: You must have a valid license purchased only from themeforest(the above
 
         function gentypelist(x) {
             var temptypelist = ''
-            for (var j = 0; j < x.length; j++) {
+            for (var j in x) {
                 temptypelist += `        <div class="intro-y box mt-5">
       <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
                 <h2 class="font-medium text-base mr-auto">
-                    ` + x[j].title + `
+                    ` + j.title + `
                 </h2>
             </div>
             <div class="p-5" id="responsive-slider">
                 <div class="preview">
                     <div class="slider mx-6  responsive-mode">
 
-                        ` + genvideolist(x[j].body) + `
+                        ` + genvideolist(j.body) + `
                     </div>
                 </div>
 
@@ -1329,45 +1359,46 @@ License: You must have a valid license purchased only from themeforest(the above
             document.body.append(script);
         }
 
+        function getallvideos(callback) {
+            var data = JSON.stringify({
+                "TableName": "videodata"
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    // console.log(this.responseText);
+                    callback(this.responseText)
+                }
+            });
+
+            xhr.open("POST", "awsscandata/");
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.send(data);
+        }
+
         function startpage() {
-            document.getElementById('videoarea').innerHTML = gentypelist([{
-                title: "中文",
-                body: ["https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                ]
-            }, {
-                title: "英文",
-                body: ["https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                ]
-            }, {
-                title: "數學",
-                body: ["https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                ]
-            }, {
-                title: "通識",
-                body: ["https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                    "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
-                ]
-            }])
+            getallvideos(function (data) {
+                console.log(JSON.parse(data))
+                var tempshowdata = {}
+                var myitems = JSON.parse(data).Items
+                myitems.map(x => {
+                    if (x.photourl) {
+                        if (!tempshowdata[x.subject]) {
+                            tempshowdata[x.subject] = {
+                                body: []
+                            }
+                        }
+                        tempshowdata[x.subject].body.push(x.photourl)
+                    }
+                })
+                console.log(myitems)
+
+            })
+            document.getElementById('videoarea').innerHTML = gentypelist()
             appenscript()
         }
 
