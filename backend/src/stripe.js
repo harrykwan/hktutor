@@ -3,9 +3,9 @@ const stripe = require('stripe')('sk_live_51H0UNiI2wlVhRFhOfcimY6QGd8w0nsQAlPFCg
 
 
 
-async function getclientsecret(callback) {
+async function getclientsecret(amount, callback) {
     const paymentIntent = await stripe.paymentIntents.create({
-        amount: 400,
+        amount: amount,
         currency: 'hkd',
         // Verify your integration in this guide by including this parameter
         metadata: {

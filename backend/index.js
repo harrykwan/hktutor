@@ -80,7 +80,7 @@ app.get('/video', (req, res) => res.sendFile('html/singlevideo.html', {
     root: __dirname
 }))
 
-app.get('/teststripe', (req, res) => res.sendFile('html/payment.html', {
+app.get('/payment', (req, res) => res.sendFile('html/payment.html', {
     root: __dirname
 }))
 
@@ -90,13 +90,41 @@ app.get('/testbank', (req, res) => res.sendFile('html/testbank.html', {
 }))
 
 
-app.get('/stripesecret', async (req, res) => {
-    stripeapi.getclientsecret(function (client_secret) {
-        res.json({
-            client_secret: client_secret
-        });
+app.get('/stripesecret/:vid', async (req, res) => {
+    awsapi.readvideoitem("videodata", req.params.vid, undefined, undefined, function (x) {
+        console.log(x.Item.price)
+        var myprice = parseInt(x.Item.price) * 100
+        stripeapi.getclientsecret(myprice, function (client_secret) {
+            res.json({
+                client_secret: client_secret,
+                amount: x.Item.price
+            });
+        })
     })
+
 });
+
+
+app.post('/paydone', (req, res, next) => {
+    console.log(req.body)
+    awsapi.readitem("userpurchase", req.body.uid, undefined, undefined, function (x) {
+        console.log(x)
+        var myvidlist
+        if (x.Item) {
+            myvidlist = x.Item.vidlist
+        } else {
+            myvidlist = []
+        }
+        myvidlist.push(req.body.vid)
+        var tempjson = {
+            uid: req.body.uid,
+            vidlist: myvidlist
+        }
+        console.log(tempjson)
+        awsapi.createitem("userpurchase", tempjson, req, res)
+    })
+
+})
 
 
 
@@ -215,6 +243,10 @@ app.post('/awsscandata', (req, res) => {
     awsapi.awsscan(req.body, function (data) {
         res.send(data)
     })
+})
+
+app.get('/getpurchaselist/:uid', (req, res) => {
+    awsapi.readitem("userpurchase", req.params.uid, req, res)
 })
 
 

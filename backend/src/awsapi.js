@@ -129,6 +129,34 @@ function createtable_userprofiledata() {
     });
 }
 
+
+function createtable_userpurchase() {
+    var params = {
+        TableName: "userpurchase",
+        KeySchema: [{
+            AttributeName: "uid",
+            KeyType: "HASH"
+        }],
+        AttributeDefinitions: [{
+            AttributeName: "uid",
+            AttributeType: "S"
+        }],
+        ProvisionedThroughput: {
+            ReadCapacityUnits: 10,
+            WriteCapacityUnits: 10
+        }
+    };
+
+    dynamodb.createTable(params, function (err, data) {
+        if (err) {
+            console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
+        }
+    });
+}
+// createtable_userpurchase()
+
 function createtable_videodata() {
     var params = {
         TableName: "videodata",
@@ -267,6 +295,32 @@ function readitem(table, uid, req, res, callback) {
     });
 }
 
+function readvideoitem(table, vid, req, res, callback) {
+
+    var params = {
+        TableName: table,
+        Key: {
+            "vid": vid,
+        }
+    };
+
+    docClient.get(params, function (err, data) {
+        if (err) {
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+
+            if (callback) {
+                callback(data)
+            }
+            if (res) {
+                res.send(data)
+
+            }
+            console.log("GetItem succeeded:", data);
+        }
+    });
+}
+
 // readitem('testuid')
 
 
@@ -323,6 +377,7 @@ exports.getphoto = getphotofroms3
 // exports.createtable = createtable
 exports.createitem = createitem
 exports.readitem = readitem
+exports.readvideoitem = readvideoitem
 exports.cvupload = cvupload
 exports.awsquery = awsquery
 exports.awsscan = awsscan

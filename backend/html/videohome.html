@@ -24,6 +24,30 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="dist/css/app.css" />
     <!-- END: CSS Assets-->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyA5QUgfr2za8BHqGYfGJW1NCqmMUxAq9vg",
+            authDomain: "student-3ninjas.firebaseapp.com",
+            databaseURL: "https://student-3ninjas.firebaseio.com",
+            projectId: "student-3ninjas",
+            storageBucket: "student-3ninjas.appspot.com",
+            messagingSenderId: "1054589951451",
+            appId: "1:1054589951451:web:4189c20995e6400eb8dbfe",
+            measurementId: "G-4ZBLW3G22S"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
     <style>
         iframe {
             width: 100%;
@@ -775,481 +799,29 @@ License: You must have a valid license purchased only from themeforest(the above
     <nav class="top-nav">
         <ul>
             <li>
-                <a href="top-menu-dashboard.html" class="top-menu">
+                <a href="home" class="top-menu">
                     <div class="top-menu__icon"> <i data-feather="home"></i> </div>
-                    <div class="top-menu__title"> Dashboard </div>
+                    <div class="top-menu__title"> Home </div>
                 </a>
             </li>
+
+
             <li>
-                <a href="javascript:;" class="top-menu">
-                    <div class="top-menu__icon"> <i data-feather="box"></i> </div>
-                    <div class="top-menu__title"> Menu Layout <i data-feather="chevron-down"
-                            class="top-menu__sub-icon"></i> </div>
-                </a>
-                <ul class="">
-                    <li>
-                        <a href="index.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Side Menu </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="simple-menu-dashboard.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Simple Menu </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-dashboard.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Top Menu </div>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;.html" class="top-menu top-menu--active">
-                    <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                    <div class="top-menu__title"> Apps <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
-                    </div>
-                </a>
-                <ul class="top-menu__sub-open">
-                    <li>
-                        <a href="javascript:;" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Users <i data-feather="chevron-down"
-                                    class="top-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="top-menu-users-layout-1.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 1</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-users-layout-2.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 2</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-users-layout-3.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 3</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Profile <i data-feather="chevron-down"
-                                    class="top-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="top-menu-profile-overview-1.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Overview 1</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-profile-overview-2.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Overview 2</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-profile-overview-3.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Overview 3</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="top-menu-inbox.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Inbox </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-file-manager.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> File Manager </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-point-of-sale.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Point of Sale </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-chat.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Chat </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-post.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Post </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Crud <i data-feather="chevron-down"
-                                    class="top-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="side-menu-crud-data-list.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Data List</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="side-menu-crud-form.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Form</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;" class="top-menu">
+                <a href="videohome" class="top-menu top-menu--active">
                     <div class="top-menu__icon"> <i data-feather="layout"></i> </div>
-                    <div class="top-menu__title"> Pages <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
+                    <div class="top-menu__title"> My Videos
                     </div>
                 </a>
-                <ul class="">
-                    <li>
-                        <a href="javascript:;" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Wizards <i data-feather="chevron-down"
-                                    class="top-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="top-menu-wizard-layout-1.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 1</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-wizard-layout-2.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 2</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-wizard-layout-3.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 3</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Blog <i data-feather="chevron-down"
-                                    class="top-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="top-menu-blog-layout-1.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 1</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-blog-layout-2.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 2</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-blog-layout-3.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 3</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Pricing <i data-feather="chevron-down"
-                                    class="top-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="top-menu-pricing-layout-1.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 1</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-pricing-layout-2.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 2</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Invoice <i data-feather="chevron-down"
-                                    class="top-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="top-menu-invoice-layout-1.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 1</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-invoice-layout-2.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 2</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> FAQ <i data-feather="chevron-down"
-                                    class="top-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="top-menu-faq-layout-1.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 1</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-faq-layout-2.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 2</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-faq-layout-3.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Layout 3</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="login-login.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Login </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="login-register.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Register </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="main-error-page.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Error Page </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-update-profile.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Update profile </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-change-password.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Change Password </div>
-                        </a>
-                    </li>
-                </ul>
+
             </li>
+
             <li>
-                <a href="javascript:;" class="top-menu">
-                    <div class="top-menu__icon"> <i data-feather="inbox"></i> </div>
-                    <div class="top-menu__title"> Components <i data-feather="chevron-down"
-                            class="top-menu__sub-icon"></i> </div>
-                </a>
-                <ul class="">
-                    <li>
-                        <a href="javascript:;" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Grid <i data-feather="chevron-down"
-                                    class="top-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="top-menu-regular-table.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Regular Table</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="top-menu-datatable.html" class="top-menu">
-                                    <div class="top-menu__icon"> <i data-feather="zap"></i> </div>
-                                    <div class="top-menu__title">Datatable</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="top-menu-accordion.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Accordion </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-button.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Button </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-modal.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Modal </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-alert.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Alert </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-progress-bar.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Progress Bar </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-tooltip.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Tooltip </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-dropdown.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Dropdown </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-toast.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Toast </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-typography.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Typography </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-icon.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Icon </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="side-menu-loading-icon.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Loading Icon </div>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;" class="top-menu">
-                    <div class="top-menu__icon"> <i data-feather="sidebar"></i> </div>
-                    <div class="top-menu__title"> Forms <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
+                <a href="testbank" class="top-menu ">
+                    <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
+                    <div class="top-menu__title"> Test Banks
                     </div>
                 </a>
-                <ul class="">
-                    <li>
-                        <a href="top-menu-regular-form.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Regular Form </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-datepicker.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Datepicker </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-select2.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Select2 </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-file-upload.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> File Upload </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-wysiwyg-editor.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Wysiwyg Editor </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-validation.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Validation </div>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;" class="top-menu">
-                    <div class="top-menu__icon"> <i data-feather="hard-drive"></i> </div>
-                    <div class="top-menu__title"> Widgets <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
-                    </div>
-                </a>
-                <ul class="">
-                    <li>
-                        <a href="top-menu-chart.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Chart </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-slider.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Slider </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-image-zoom.html" class="top-menu">
-                            <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title"> Image Zoom </div>
-                        </a>
-                    </li>
-                </ul>
+
             </li>
         </ul>
     </nav>
@@ -1260,36 +832,11 @@ License: You must have a valid license purchased only from themeforest(the above
             <h2 class="text-lg font-medium mr-auto">
                 My Videos
             </h2>
-            <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <a href="javascript:;" data-toggle="modal" data-target="#new-order-modal"
-                    class="button text-white bg-theme-1 shadow-md mr-2">New Order</a>
-                <div class="pos-dropdown dropdown relative ml-auto sm:ml-0">
-                    <button class="dropdown-toggle button px-2 box text-gray-700">
-                        <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4"
-                                data-feather="chevron-down"></i> </span>
-                    </button>
-                    <div class="pos-dropdown__dropdown-box dropdown-box mt-10 absolute top-0 right-0 z-20">
-                        <div class="dropdown-box__content box p-2">
-                            <a href=""
-                                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md">
-                                <i data-feather="activity" class="w-4 h-4 mr-2"></i> <span class="truncate">INV-0206020
-                                    - Brad Pitt</span> </a>
-                            <a href=""
-                                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md">
-                                <i data-feather="activity" class="w-4 h-4 mr-2"></i> <span class="truncate">INV-0206022
-                                    - Brad Pitt</span> </a>
-                            <a href=""
-                                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md">
-                                <i data-feather="activity" class="w-4 h-4 mr-2"></i> <span class="truncate">INV-0206021
-                                    - Tom Cruise</span> </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
-        <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
+        <div class="pos intro-y  gap-5 mt-5">
             <!-- BEGIN: Item List -->
-            <div class="intro-y col-span-12 lg:col-span-8">
+            <div class="intro-y ">
                 <div class="lg:flex intro-y">
                     <div class="relative text-gray-700">
                         <input type="text" class="input input--lg w-full lg:w-64 box pr-10 placeholder-theme-13"
@@ -1314,140 +861,9 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
             </div>
             <!-- END: Item List -->
-            <!-- BEGIN: Ticket -->
-            <div class="col-span-12 lg:col-span-4">
-                <div class="intro-y pr-1">
-                    <div class="box p-2">
-                        <div class="pos__tabs nav-tabs justify-center flex"> <a data-toggle="tab" data-target="#ticket"
-                                href="javascript:;" class="flex-1 py-2 rounded-md text-center active">Videos</a> <a
-                                data-toggle="tab" data-target="#details" href="javascript:;"
-                                class="flex-1 py-2 rounded-md text-center">Details</a> </div>
-                    </div>
-                </div>
-                <div class="tab-content">
-                    <div class="tab-content__pane active" id="ticket">
-                        <div class="pos__ticket box p-2 mt-5">
-                            <a href="javascript:;" data-toggle="modal" data-target="#add-item-modal"
-                                class="flex items-center p-3 cursor-pointer transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md">
-                                <div class="pos__ticket__item-name truncate mr-1">Video 1</div>
-                                <div class="text-gray-600">x 1</div>
-                                <i data-feather="edit" class="w-4 h-4 text-gray-600 ml-2"></i>
-                                <div class="ml-auto">$76</div>
-                            </a>
-                            <a href="javascript:;" data-toggle="modal" data-target="#add-item-modal"
-                                class="flex items-center p-3 cursor-pointer transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md">
-                                <div class="pos__ticket__item-name truncate mr-1">Video 2</div>
-                                <div class="text-gray-600">x 1</div>
-                                <i data-feather="edit" class="w-4 h-4 text-gray-600 ml-2"></i>
-                                <div class="ml-auto">$92</div>
-                            </a>
-                            <a href="javascript:;" data-toggle="modal" data-target="#add-item-modal"
-                                class="flex items-center p-3 cursor-pointer transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md">
-                                <div class="pos__ticket__item-name truncate mr-1">Video 5</div>
-                                <div class="text-gray-600">x 1</div>
-                                <i data-feather="edit" class="w-4 h-4 text-gray-600 ml-2"></i>
-                                <div class="ml-auto">$216</div>
-                            </a>
 
-                        </div>
-                        <div class="box flex p-5 mt-5">
-                            <div class="w-full relative text-gray-700">
-                                <input type="text" class="input input--lg w-full bg-gray-200 pr-10 placeholder-theme-13"
-                                    placeholder="Use coupon code...">
-                                <i class="w-4 h-4 hidden sm:absolute my-auto inset-y-0 mr-3 right-0"
-                                    data-feather="search"></i>
-                            </div>
-                            <button class="button text-white bg-theme-1 ml-2">Apply</button>
-                        </div>
-                        <div class="box p-5 mt-5">
-                            <div class="flex">
-                                <div class="mr-auto">Subtotal</div>
-                                <div>$250</div>
-                            </div>
-                            <div class="flex mt-4">
-                                <div class="mr-auto">Discount</div>
-                                <div class="text-theme-6">-$20</div>
-                            </div>
-                            <div class="flex mt-4">
-                                <div class="mr-auto">Tax</div>
-                                <div>15%</div>
-                            </div>
-                            <div class="flex mt-4 pt-4 border-t border-gray-200">
-                                <div class="mr-auto font-medium text-base">Charge</div>
-                                <div class="font-medium text-base">$220</div>
-                            </div>
-                        </div>
-                        <div class="flex mt-5">
-                            <button class="button w-32 border border-gray-400 text-gray-600">Clear Items</button>
-                            <button class="button w-32 text-white bg-theme-1 shadow-md ml-auto">Charge</button>
-                        </div>
-                    </div>
-                    <div class="tab-content__pane" id="details">
-                        <div class="box p-5 mt-5">
-                            <div class="flex items-center border-b pb-5">
-                                <div class="">
-                                    <div class="text-gray-600">Time</div>
-                                    <div>02/06/20 02:10 PM</div>
-                                </div>
-                                <i data-feather="clock" class="w-4 h-4 text-gray-600 ml-auto"></i>
-                            </div>
-                            <div class="flex items-center border-b py-5">
-                                <div class="">
-                                    <div class="text-gray-600">Customer</div>
-                                    <div>Kevin Spacey</div>
-                                </div>
-                                <i data-feather="user" class="w-4 h-4 text-gray-600 ml-auto"></i>
-                            </div>
-                            <div class="flex items-center border-b py-5">
-                                <div class="">
-                                    <div class="text-gray-600">People</div>
-                                    <div>3</div>
-                                </div>
-                                <i data-feather="users" class="w-4 h-4 text-gray-600 ml-auto"></i>
-                            </div>
-                            <div class="flex items-center pt-5">
-                                <div class="">
-                                    <div class="text-gray-600">Table</div>
-                                    <div>21</div>
-                                </div>
-                                <i data-feather="mic" class="w-4 h-4 text-gray-600 ml-auto"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END: Ticket -->
         </div>
-        <!-- BEGIN: New Order Modal -->
-        <div class="modal" id="new-order-modal">
-            <div class="modal__content">
-                <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200">
-                    <h2 class="font-medium text-base mr-auto">
-                        New Order
-                    </h2>
-                </div>
-                <div class="p-5 grid grid-cols-12 gap-4 row-gap-3">
-                    <div class="col-span-12">
-                        <label>Name</label>
-                        <input type="text" class="input w-full border mt-2 flex-1" placeholder="Customer name">
-                    </div>
-                    <div class="col-span-12">
-                        <label>Table</label>
-                        <input type="text" class="input w-full border mt-2 flex-1" placeholder="Customer table">
-                    </div>
-                    <div class="col-span-12">
-                        <label>Number of People</label>
-                        <input type="text" class="input w-full border mt-2 flex-1" placeholder="People">
-                    </div>
-                </div>
-                <div class="px-5 py-3 text-right border-t border-gray-200">
-                    <button type="button" data-dismiss="modal"
-                        class="button w-32 border text-gray-700 mr-1">Cancel</button>
-                    <button type="button" class="button w-32 bg-theme-1 text-white">Create Ticket</button>
-                </div>
-            </div>
-        </div>
-        <!-- END: New Order Modal -->
+
         <!-- BEGIN: Add Item Modal -->
         <div class="modal" id="add-item-modal">
             <div class="modal__content">
@@ -1485,6 +901,36 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
     <script>
+        var myuid
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                myuid = uid
+                var providerData = user.providerData;
+                // ...
+
+                if (emailVerified) {
+
+                } else {
+
+                }
+
+                console.log(user)
+
+                startpage()
+            } else {
+                // User is signed out.
+                // ...
+                window.location.href = "chooseside";
+            }
+        });
+
         function genvideoitem(x) {
             var tempitem = `  <a class="intro-y block col-span-12 sm:col-span-4 xxl:col-span-3">
                         <div class="box rounded-md p-3 relative zoom-in">
@@ -1550,11 +996,70 @@ License: You must have a valid license purchased only from themeforest(the above
             xhr.send(data);
         }
 
-        startpage()
+        function getpurchaselist(callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                    callback(this.responseText)
+                }
+            });
+
+            xhr.open("GET", "getpurchaselist/" + myuid);
+
+            xhr.send();
+        }
+
 
         nowtypename = "中文"
 
+        function getallvideos(callback) {
+            var data = JSON.stringify({
+                "TableName": "videodata"
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    // console.log(this.responseText);
+                    callback(this.responseText)
+                }
+            });
+
+            xhr.open("POST", "awsscandata/");
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.send(data);
+        }
+
+        var myvideolist = {}
+        var allvideolist = {}
+
         function startpage() {
+            getpurchaselist(function (purchaselist) {
+                purchaselist = JSON.parse(purchaselist).Item.vidlist
+                getallvideos(function (allvideos) {
+                    allvideos = JSON.parse(allvideos).Items
+                    allvideos.map(x => {
+                        allvideollist[x.vid] = x
+                    })
+                    purchaselist.map(x => {
+                        if (!myvideolist[allvideolist[x].subject]) {
+                            myvideolist[allvideolist[x].subject] = []
+                        }
+                        myvideolist[allvideolist[x].subject].push({
+                            videobody: allvideolist[x].photoURL,
+                            videoname: allvideolist[x].title
+                        })
+                    })
+                    console.log(myvideolist)
+                })
+            })
+
             document.getElementById("videotypearea").innerHTML = gentypelist([{
                 typename: "中文",
                 typenum: 0
