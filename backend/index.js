@@ -53,6 +53,9 @@ app.get('/studentprofile', (req, res) => res.sendFile('html/studentprofile.html'
 app.get('/home', (req, res) => res.sendFile('html/home.html', {
     root: __dirname
 }))
+app.get('/oldhome', (req, res) => res.sendFile('html/home_old.html', {
+    root: __dirname
+}))
 app.get('/emailconfirm', (req, res) => res.sendFile('html/emailconfirm.html', {
     root: __dirname
 }))

@@ -29,7 +29,8 @@ License: You must have a valid license purchased only from themeforest(the above
         .videoitem {}
 
         .videoitem:hover {
-            transform: scale(1.5);
+            /* transform: scale(1.5); */
+            opacity: .5;
         }
     </style>
 </head>
@@ -827,10 +828,6 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
     <!-- END: Content -->
-    <!-- BEGIN: JS Assets-->
-    <script
-        src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
 
 
 
@@ -857,9 +854,10 @@ License: You must have a valid license purchased only from themeforest(the above
             var tempitem =
                 ` <div class="h-64 px-2">
                             <div class="h-full image-fit rounded-md overflow-hidden">
-                                <a onclick="showdetail('` + x.vid +
-                `')" data-toggle="modal" data-target="#button-modal-preview" ><img class="videoitem" alt="Midone Tailwind HTML Admin Template" src="` +
+                                <img onclick="console.log(this.nextSibling.nextSibling.click())" class="videoitem" alt="Midone Tailwind HTML Admin Template" src="` +
                 x.photourl + `" />
+                                <a hidden onclick="showdetail('` + x.vid +
+                `')" data-toggle="modal" data-target="#button-modal-preview" >
                                 </a>
                             </div>
                         </div>`
@@ -867,10 +865,25 @@ License: You must have a valid license purchased only from themeforest(the above
 
         }
 
+        function genwhiteitem() {
+            var tempitem =
+                ` <div class="h-64 px-2">
+                            <div class="h-full image-fit rounded-md overflow-hidden">
+                                <img class="videoitem" src="https://edleuro.com/wp-content/uploads/2014/04/EEQ-6508PG-Polar-White-1.2mm.jpg" />
+                                <a hidden>
+                                </a>
+                            </div>
+                        </div>`
+            return tempitem
+        }
+
         function genvideolist(x) {
             var tempitem = ''
             for (var j = 0; j < x.length; j++) {
                 tempitem += genitem(x[j])
+            }
+            if (x.length > 3 && x.length % 3 == 1) {
+                tempitem += genwhiteitem()
             }
             return tempitem
         }
