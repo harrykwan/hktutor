@@ -936,9 +936,9 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="box rounded-md p-3 relative zoom-in">
                             <div class="flex-none pos-image relative block">
                                 <div class="pos-image__preview image-fit">
-                                   ` +
+                                    <img onclick="window.location.href = 'video?vid=` + x.vid + `'" src='` +
                 x.videobody +
-                `       </div>
+                `'>       </div>
                             </div>
                             <div class="block font-medium text-center truncate mt-3">` + x.videoname + `</div>
                         </div>
@@ -1046,15 +1046,16 @@ License: You must have a valid license purchased only from themeforest(the above
                 getallvideos(function (allvideos) {
                     allvideos = JSON.parse(allvideos).Items
                     allvideos.map(x => {
-                        allvideollist[x.vid] = x
+                        allvideolist[x.vid] = x
                     })
                     purchaselist.map(x => {
                         if (!myvideolist[allvideolist[x].subject]) {
                             myvideolist[allvideolist[x].subject] = []
                         }
                         myvideolist[allvideolist[x].subject].push({
-                            videobody: allvideolist[x].photoURL,
-                            videoname: allvideolist[x].title
+                            videobody: allvideolist[x].photourl,
+                            videoname: allvideolist[x].title,
+                            vid: x
                         })
                     })
                     console.log(myvideolist)

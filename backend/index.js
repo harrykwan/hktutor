@@ -108,6 +108,7 @@ app.get('/stripesecret/:vid', async (req, res) => {
 });
 
 
+
 app.post('/paydone', (req, res, next) => {
     console.log(req.body)
     awsapi.readitem("userpurchase", req.body.uid, undefined, undefined, function (x) {
@@ -231,7 +232,7 @@ app.post('/updatevideodata', (req, res, next) => {
 })
 
 app.get('/readvideodata/:vid', (req, res) => {
-    awsapi.readitem("videodata", req.params.vid, req, res)
+    awsapi.readvideoitem("videodata", req.params.vid, req, res)
 })
 
 app.get('/awsquerydata', (req, res) => {
