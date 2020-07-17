@@ -957,7 +957,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
         function genvideotype(x) {
-            var tempitem = `<div class="col-span-12 sm:col-span-4 xxl:col-span-3 box p-5 cursor-pointer zoom-in">
+            var tempitem = `<div onclick="switchsubject('` + x.typename + `')" class="col-span-12 sm:col-span-4 xxl:col-span-3 box p-5 cursor-pointer zoom-in">
                         <div class="font-medium text-base">` + x.typename + `</div>
                         <div class="text-gray-600">` + x.typenum + ` Items</div>
                     </div>`
@@ -1034,6 +1034,13 @@ License: You must have a valid license purchased only from themeforest(the above
             xhr.setRequestHeader("Content-Type", "application/json");
 
             xhr.send(data);
+        }
+
+
+        function switchsubject(x) {
+            nowtypename = x
+            document.getElementById('videolistarea').innerHTML = genvideolist(myvideolist[
+                nowtypename])
         }
 
         var myvideolist = {}

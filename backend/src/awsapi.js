@@ -244,7 +244,7 @@ function createtable_videodata() {
 
 
 
-function createitem(table, item, req, res) {
+function createitem(table, item, req, res, callback) {
 
     var params = {
         TableName: table,
@@ -256,6 +256,9 @@ function createitem(table, item, req, res) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
+            if (callback) {
+                callback(data)
+            }
             if (res) {
                 res.send(data)
             }

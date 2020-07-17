@@ -164,7 +164,9 @@ app.post('/uploadtolocal/:uid', (req, res) => {
                             }
 
                             console.log(tempitem)
-                            awsapi.createitem("userprofiledata", tempitem, req, res)
+                            awsapi.createitem("userprofiledata", tempitem, undefined, undefined, function (x) {
+                                res.send(uri)
+                            })
                         })
 
                 })
@@ -250,7 +252,7 @@ app.post('/addvideocomment/:vid', (req, res) => {
             }
         } else {
             var tempcommentobj = {
-                body: x.Item,
+                body: x.Item.body,
                 vid: req.params.vid
             }
             tempcommentobj.body.push(req.body)

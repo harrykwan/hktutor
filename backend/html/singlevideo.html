@@ -828,6 +828,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="content">
         <div class="intro-y news p-5 box mt-8">
             <!-- BEGIN: Blog Layout -->
+
             <h2 class="intro-y font-medium text-xl sm:text-2xl" id="videotitlearea">
 
             </h2>
@@ -876,6 +877,8 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="intro-y text-justify leading-relaxed" id="videodescriparea">
 
             </div>
+
+
             <div
                 class="intro-y flex text-xs sm:text-sm flex-col sm:flex-row items-center mt-5 pt-5 border-t border-gray-200">
                 <div class="flex items-center">
@@ -898,14 +901,26 @@ License: You must have a valid license purchased only from themeforest(the above
                     <i data-feather="message-circle"
                         class="w-5 h-5 absolute my-auto inset-y-0 ml-6 left-0 text-gray-600"></i>
                     <textarea class="input w-full bg-gray-200 pl-16 py-6 placeholder-theme-13 resize-none" rows="1"
-                        placeholder="Post a comment..."></textarea>
+                        onkeypress="checkenter(event,this)" placeholder="Post a comment..."></textarea>
                 </div>
             </div>
             <div class="intro-y mt-5 pb-10" id="commentarea">
 
             </div>
             <!-- END: Comments -->
+
         </div>
+        <br><br>
+        <div style="width: 100%; text-align: right;"> <button style="width: 100%;" onclick="doatest()"
+                class="button w-24 mr-1 mb-2 bg-theme-6 text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle mx-auto">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>Do a Test
+            </button></div>
+
     </div>
     <!-- END: Content -->
     <!-- BEGIN: JS Assets-->
@@ -938,6 +953,29 @@ License: You must have a valid license purchased only from themeforest(the above
             }
         });
 
+
+        function checkenter(e, x) {
+            if (e.keyCode == 13) {
+                console.log(x.value)
+                var today = new Date();
+                var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var dateTime = date + ' ' + time;
+                var tempjson = {
+                    body: x.value,
+                    uid: myuid,
+                    name: myname,
+                    profilepic: myphoto,
+                    fulltime: today.getTime(),
+                    time: dateTime
+                }
+                console.log(tempjson)
+                addvideocomment(vid, tempjson, function (x) {
+                    location.reload()
+                })
+                // x.value = ''
+            }
+        }
 
 
         function gencomment(x) {
@@ -998,7 +1036,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     fillvideodata(videodata)
 
                     readcommentdata(vid, function (x) {
-                        x = JSON.parse(x)
+                        x = JSON.parse(x).Item
                         console.log(x)
                         if (x.body) {
                             document.getElementById('commentarea').innerHTML = gencommentarea(x.body)
@@ -1018,6 +1056,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
         function addvideocomment(vid, data, callback) {
+            data = JSON.stringify(data)
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
 
@@ -1041,7 +1080,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
-                    console.log(this.responseText);
+                    // console.log(this.responseText);
                     callback(this.responseText)
                 }
             });
@@ -1078,6 +1117,10 @@ License: You must have a valid license purchased only from themeforest(the above
             script.async = false;
 
             document.body.append(script);
+        }
+
+        function doatest() {
+            window.location.href = "testbank?vid=" + vid
         }
     </script>
     <!-- <script src="dist/js/app.js"> -->

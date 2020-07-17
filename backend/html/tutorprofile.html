@@ -1167,7 +1167,9 @@ License: You must have a valid license purchased only from themeforest(the above
                 cv: allcvdata
             }
             console.log(tempjson)
-            dbsaveitem(tempjson)
+            dbsaveitem(tempjson, function (x) {
+                alert('ok')
+            })
         }
 
 

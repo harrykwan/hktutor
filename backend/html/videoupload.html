@@ -1301,8 +1301,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
         </div>
-
-
+        <div style="width: 100;text-align: right;">
+            <button onclick="gotovideoupdate()" class="button w-24 mr-1 mb-2 bg-theme-1 text-white">Next</button>
+        </div>
 
     </div>
 
@@ -1310,7 +1311,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN: JS Assets-->
 
     <script>
-        var allfileres
+        var allfileres = []
 
         function createform(uid) {
             console.log(uid)
@@ -1368,6 +1369,14 @@ License: You must have a valid license purchased only from themeforest(the above
             xhr.setRequestHeader("Content-Type", "application/json");
 
             xhr.send(data);
+        }
+
+        function gotovideoupdate() {
+            if (!allfileres[0]) {
+                alert('not yet done')
+                return
+            }
+            window.location.href = "videoupdate?vid=" + allfileres[0].split('/')[2]
         }
     </script>
 

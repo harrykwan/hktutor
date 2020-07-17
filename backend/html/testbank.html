@@ -24,6 +24,29 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="dist/css/app.css" />
     <!-- END: CSS Assets-->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyA5QUgfr2za8BHqGYfGJW1NCqmMUxAq9vg",
+            authDomain: "student-3ninjas.firebaseapp.com",
+            databaseURL: "https://student-3ninjas.firebaseio.com",
+            projectId: "student-3ninjas",
+            storageBucket: "student-3ninjas.appspot.com",
+            messagingSenderId: "1054589951451",
+            appId: "1:1054589951451:web:4189c20995e6400eb8dbfe",
+            measurementId: "G-4ZBLW3G22S"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
 </head>
 <!-- END: Head -->
 
@@ -830,7 +853,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- END: Radio Button -->
                 <div class=" mt-5">
                     <button onclick="submitanswer(this)"
-                        class="button w-24 mr-1 mb-2 bg-theme-7 text-white">Submit</button>
+                        class="button w-24 mr-1 mb-2 bg-theme-1 text-white">Submit</button>
                 </div>
 
             </div>
@@ -842,6 +865,81 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <script src="dist/js/app.js"></script>
     <script>
+        var myname, myuid, myphoto
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                nowuser = user
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                var providerData = user.providerData;
+
+                myname = displayName
+                myuid = uid
+                myphoto = photoURL
+
+                console.log(user)
+
+            } else {
+                // User is signed out.
+                // ...
+                window.location.href = "chooseside";
+            }
+        });
+
+        var vid
+        var url = new URL(window.location.href);
+        var searchParams = new URLSearchParams(url.search);
+        if (!searchParams.get("vid")) {
+            vid = undefined
+        } else {
+            vid = searchParams.get("vid")
+        }
+
+        function startpage() {
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                    var mydata = JSON.parse(this.responseText).Item
+                    var videodata = {}
+                    console.log(mydata)
+                    videodata.name = mydata.title
+                    videodata.type = mydata.subject
+                    videodata.descrip = mydata.descrip
+                    videodata.creatername = mydata.teacher
+                    videodata.creatertitle = "teacher"
+                    videodata.body = ` <iframe src="https://player.vimeo.com/video/` + vid + `" width="640" height="480" frameborder="0"
+                        allow="autoplay; fullscreen" allowfullscreen></iframe>`
+                    videodata.date = "12/3/2020"
+                    fillvideodata(videodata)
+
+                    readcommentdata(vid, function (x) {
+                        x = JSON.parse(x).Item
+                        console.log(x)
+                        if (x.body) {
+                            document.getElementById('commentarea').innerHTML = gencommentarea(x.body)
+                        }
+
+
+                        appenscript()
+                    })
+                }
+            });
+
+            xhr.open("GET", "readvideodata/" + vid);
+
+            xhr.send();
+        }
+
+
+
         var myquestiondata = [{
             type: 'mc',
             question: 'Which of the following statements is correct?',
