@@ -889,6 +889,7 @@ License: You must have a valid license purchased only from themeforest(the above
             console.log(videophotourl)
         })
 
+        var myname, myuid, myphoto
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 nowuser = user
@@ -901,6 +902,10 @@ License: You must have a valid license purchased only from themeforest(the above
                 var uid = user.uid;
                 var providerData = user.providerData;
 
+                myname = displayName
+                myuid = uid
+                myphoto = photourl
+
                 console.log(user)
 
             } else {
@@ -909,6 +914,9 @@ License: You must have a valid license purchased only from themeforest(the above
                 window.location.href = "chooseside";
             }
         });
+
+
+
 
 
         function updatevideodata(mydata) {

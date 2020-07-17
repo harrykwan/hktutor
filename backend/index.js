@@ -235,6 +235,31 @@ app.get('/readvideodata/:vid', (req, res) => {
     awsapi.readvideoitem("videodata", req.params.vid, req, res)
 })
 
+app.get('/readvideocomment/:vid', (req, res) => {
+    awsapi.readvideoitem("videocomment", req.params.vid, req, res)
+})
+
+app.post('/addvideocomment/:vid', (req, res) => {
+    awsapi.readvideoitem("videocomment", req.params.vid, undefined, undefined, function (x) {
+        console.log(req.body)
+        if (Object.keys(x).length === 0 && x.constructor === Object) {
+            //create record
+            var tempcommentobj = {
+                body: [req.body],
+                vid: req.params.vid
+            }
+        } else {
+            var tempcommentobj = {
+                body: x.Item,
+                vid: req.params.vid
+            }
+            tempcommentobj.body.push(req.body)
+        }
+        console.log(tempcommentobj)
+        awsapi.createitem("videocomment", tempcommentobj, req, res)
+    })
+})
+
 app.get('/awsquerydata', (req, res) => {
     awsapi.awsquery(req.body, function (data) {
         res.send(data)

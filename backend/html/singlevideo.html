@@ -23,6 +23,29 @@ License: You must have a valid license purchased only from themeforest(the above
     <title>Blog - Midone - Tailwind HTML Admin Template</title>
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="dist/css/app.css" />
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyA5QUgfr2za8BHqGYfGJW1NCqmMUxAq9vg",
+            authDomain: "student-3ninjas.firebaseapp.com",
+            databaseURL: "https://student-3ninjas.firebaseio.com",
+            projectId: "student-3ninjas",
+            storageBucket: "student-3ninjas.appspot.com",
+            messagingSenderId: "1054589951451",
+            appId: "1:1054589951451:web:4189c20995e6400eb8dbfe",
+            measurementId: "G-4ZBLW3G22S"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
 
     <style>
         iframe {
@@ -889,6 +912,34 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
     <script>
+        var myname, myuid, myphoto
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                nowuser = user
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                var providerData = user.providerData;
+
+                myname = displayName
+                myuid = uid
+                myphoto = photoURL
+
+                console.log(user)
+
+            } else {
+                // User is signed out.
+                // ...
+                window.location.href = "chooseside";
+            }
+        });
+
+
+
         function gencomment(x) {
             var tempcomment = `<div class="mt-5 pt-5 border-t border-gray-200">
                     <div class="flex">
@@ -916,6 +967,7 @@ License: You must have a valid license purchased only from themeforest(the above
         }
 
 
+        var vid
 
         function startpage() {
             var url = new URL(window.location.href);
@@ -924,7 +976,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 alert('invalid video id')
                 window.location.href = "home";
             }
-            var vid = searchParams.get("vid")
+            vid = searchParams.get("vid")
 
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
@@ -933,17 +985,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 if (this.readyState === 4) {
                     console.log(this.responseText);
                     var mydata = JSON.parse(this.responseText).Item
-
-                    document.getElementById('commentarea').innerHTML = gencommentarea([{
-                        profilepic: "",
-                        name: "harykwan",
-                        time: "",
-                        body: "hello this video is good"
-                    }])
-
-                    appenscript()
-
                     var videodata = {}
+                    console.log(mydata)
                     videodata.name = mydata.title
                     videodata.type = mydata.subject
                     videodata.descrip = mydata.descrip
@@ -953,14 +996,59 @@ License: You must have a valid license purchased only from themeforest(the above
                         allow="autoplay; fullscreen" allowfullscreen></iframe>`
                     videodata.date = "12/3/2020"
                     fillvideodata(videodata)
+
+                    readcommentdata(vid, function (x) {
+                        x = JSON.parse(x)
+                        console.log(x)
+                        if (x.body) {
+                            document.getElementById('commentarea').innerHTML = gencommentarea(x.body)
+                        }
+
+
+                        appenscript()
+                    })
                 }
             });
 
             xhr.open("GET", "readvideodata/" + vid);
 
             xhr.send();
+        }
 
 
+
+        function addvideocomment(vid, data, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                    callback(this.responseText)
+                }
+            });
+
+            xhr.open("POST", "addvideocomment/" + vid);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.send(data);
+        }
+
+        function readcommentdata(vid, callback) {
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                    callback(this.responseText)
+                }
+            });
+
+            xhr.open("GET", "readvideocomment/" + vid);
+
+            xhr.send();
         }
 
         function fillvideodata(x) {
