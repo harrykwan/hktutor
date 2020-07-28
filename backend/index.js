@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.static('html/public', {
     root: __dirname
 }))
-app.get('/', (req, res) => res.sendFile('html/landing.html', {
+app.get('/', (req, res) => res.sendFile('html/home.html', {
     root: __dirname
 }))
 app.get('/chooseside', (req, res) => res.sendFile('html/chooseside.html', {
