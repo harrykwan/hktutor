@@ -93,6 +93,11 @@ app.get('/testbank', (req, res) => res.sendFile('html/testbank.html', {
 }))
 
 
+app.get('/course', (req, res) => res.sendFile('html/course.html', {
+    root: __dirname
+}))
+
+
 app.get('/stripesecret/:vid', async (req, res) => {
     awsapi.readvideoitem("videodata", req.params.vid, undefined, undefined, function (x) {
         console.log(x.Item.price)

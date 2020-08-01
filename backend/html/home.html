@@ -79,6 +79,9 @@ License: You must have a valid license purchased only from themeforest(the above
         left: 50%;
         transform: translate(-50%, -50%);
       }
+
+      
+      
     </style>
   </head>
   <!-- END: Head -->
@@ -105,7 +108,7 @@ License: You must have a valid license purchased only from themeforest(the above
           </a>
         </li>
         <li>
-          <a href="videohome" class="menu">
+          <a href="course" class="menu">
             <div class="menu__icon"><i data-feather="layout"></i></div>
             <div class="menu__title">Courses</div>
           </a>
@@ -500,7 +503,7 @@ License: You must have a valid license purchased only from themeforest(the above
             />
           </div>
           <div class="dropdown-box mt-10 absolute w-56 top-0 right-0 z-20">
-            <div class="dropdown-box__content box bg-theme-38 text-white">
+            <div class="dropdown-box__content box bg-theme-5 text-black">
               <div class="p-4 border-b border-theme-40">
                 <div class="font-medium">Sean Connery</div>
                 <div class="text-xs text-theme-41">Backend Engineer</div>
@@ -508,38 +511,37 @@ License: You must have a valid license purchased only from themeforest(the above
               <div class="p-2">
                 <a
                   href=""
-                  class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"
+                  class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-8 rounded-md "
                 >
-                  <i data-feather="user" class="w-4 h-4 mr-2"></i> Profile
+                  <i data-feather="user" class="w-4 h-4 mr-2"></i> 個人資料
                 </a>
                 <a
                   href=""
-                  class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"
+                  class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-8  rounded-md"
                 >
                   <i data-feather="shopping-cart" class="w-4 h-4 mr-2"></i>
-                  Shopping Cart
+                  我的購物車
                 </a>
                 <a
                   href=""
-                  class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"
+                  class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-8  rounded-md"
                 >
-                  <i data-feather="lock" class="w-4 h-4 mr-2"></i> Reset
-                  Password
+                  <i data-feather="lock" class="w-4 h-4 mr-2"></i>願望清單
                 </a>
                 <a
                   href=""
-                  class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"
+                  class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-8 rounded-md"
                 >
-                  <i data-feather="help-circle" class="w-4 h-4 mr-2"></i> Help
+                  <i data-feather="help-circle" class="w-4 h-4 mr-2"></i> 購買記錄
                 </a>
               </div>
               <div class="p-2 border-t border-theme-40">
                 <a
                   href="chooseside"
-                  class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"
+                  class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-8rounded-md"
                 >
                   <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i
-                  >Login</a
+                  >登入</a
                 >
               </div>
             </div>
@@ -560,7 +562,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </li>
 
         <li>
-          <a href="home" class="top-menu">
+          <a href="course" class="top-menu hover:bg-theme-8">
             <div class="top-menu__icon"><i data-feather="layout"></i></div>
             <div class="top-menu__title">Course</div>
           </a>
@@ -660,7 +662,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="content">
       <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-          Videos
+          熱門課程
         </h2>
       </div>
 
@@ -734,7 +736,7 @@ License: You must have a valid license purchased only from themeforest(the above
         var tempitem =
           ` <div class="h-64 px-2">
                             <div class="h-full image-fit rounded-md overflow-hidden">
-                                <img onclick="console.log(this.nextSibling.nextSibling.click())" class="videoitem" alt="Midone Tailwind HTML Admin Template" src="` +
+                                <img onclick="console.log(this.nextSibling.nextSibling.click())" class="videoitem" alt="" src="` +
           x.photourl +
           `" />
                                 <a hidden onclick="showdetail('` +
@@ -879,5 +881,6 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!-- <script src="dist/js/app.js"></script> -->
     <!-- END: JS Assets-->
+    
   </body>
 </html>

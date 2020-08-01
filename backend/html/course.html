@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<!--
+Template Name: Midone - HTML Admin Dashboard Template
+Author: Left4code
+Website: http://www.left4code.com/
+Contact: muhammadrizki@left4code.com
+Purchase: https://themeforest.net/user/left4code/portfolio
+Renew Support: https://themeforest.net/user/left4code/portfolio
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<html lang="en">
+<!-- BEGIN: Head -->
+
+<head>
+    <meta charset="utf-8">
+    <link href="dist/images/logo.svg" rel="shortcut icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+    <meta name="keywords"
+        content="admin template, Midone admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="LEFT4CODE">
+    <title>Videos</title>
+    <!-- BEGIN: CSS Assets-->
+    <link rel="stylesheet" href="dist/css/app.css" />
+    <!-- END: CSS Assets-->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyA5QUgfr2za8BHqGYfGJW1NCqmMUxAq9vg",
+            authDomain: "student-3ninjas.firebaseapp.com",
+            databaseURL: "https://student-3ninjas.firebaseio.com",
+            projectId: "student-3ninjas",
+            storageBucket: "student-3ninjas.appspot.com",
+            messagingSenderId: "1054589951451",
+            appId: "1:1054589951451:web:4189c20995e6400eb8dbfe",
+            measurementId: "G-4ZBLW3G22S"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
+    <style>
+        iframe {
+            width: 100%;
+        }
+    </style>
+</head>
+<!-- END: Head -->
+
+<body class="app">
+    <!-- BEGIN: Mobile Menu -->
+    <div class="mobile-menu md:hidden">
+        <div class="mobile-menu-bar">
+            <a href="" class="flex mr-auto">
+                <img alt="3Ninjas" class="w-6" src="logo2.png" />
+            </a>
+            <a href="javascript:;" id="mobile-menu-toggler">
+                <i data-feather="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i>
+            </a>
+        </div>
+        <ul class="border-t border-theme-24 py-5 hidden">
+            <li>
+                <a href="home" class="menu">
+                    <div class="menu__icon"><i data-feather="home"></i></div>
+                    <div class="menu__title">About Us</div>
+                </a>
+            </li>
+            <li>
+                <a href="course" class="menu">
+                    <div class="menu__icon"><i data-feather="layout"></i></div>
+                    <div class="menu__title">Courses</div>
+                </a>
+            </li>
+            <li>
+                <a href="testbank" class="menu">
+                    <div class="menu__icon"><i data-feather="activity"></i></div>
+                    <div class="menu__title">Tutors</div>
+                </a>
+            </li>
+            <li>
+                <a href="home" class="menu">
+                    <div class="menu__icon"><i data-feather="home"></i></div>
+                    <div class="menu__title">Volunteering</div>
+                </a>
+            </li>
+            <li>
+                <a href="home" class="menu">
+                    <div class="menu__icon"><i data-feather="home"></i></div>
+                    <div class="menu__title">Free Subsidy</div>
+                </a>
+            </li>
+            <li>
+                <a href="home" class="menu">
+                    <div class="menu__icon"><i data-feather="home"></i></div>
+                    <div class="menu__title">Media</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- END: Mobile Menu -->
+    <!-- BEGIN: Top Bar -->
+    <div class="border-b border-theme-24 -mt-10 md:-mt-5 -mx-3 sm:-mx-8 px-3 sm:px-8 pt-3 md:pt-0 mb-10">
+        <div class="top-bar-boxed flex items-center">
+            <!-- BEGIN: Logo -->
+            <a href="" class="-intro-x hidden md:flex">
+                <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="logo2.png" />
+                <span class="text-black text-lg ml-3">
+                    3<span class="font-medium">Ninjas</span>
+                </span>
+            </a>
+            <!-- END: Logo -->
+            <!-- BEGIN: Breadcrumb -->
+            <div class="-intro-x breadcrumb breadcrumb--light mr-auto"></div>
+    
+            <!-- END: Breadcrumb -->
+            <!-- BEGIN: Search -->
+            <div class="intro-x relative mr-3 sm:mr-6">
+                <div class="search hidden sm:block">
+                    <input type="text" class="search__input input placeholder-theme-13" placeholder="Search..." />
+                    <i data-feather="search" class="search__icon"></i>
+                </div>
+                <a class="notification notification--light sm:hidden" href="">
+                    <i data-feather="search" class="notification__icon"></i>
+                </a>
+                <div class="search-result">
+                    <div class="search-result__content">
+                        <div class="search-result__content__title">Pages</div>
+                        <div class="mb-5">
+                            <a href="" class="flex items-center">
+                                <div class="w-8 h-8 bg-theme-18 text-theme-9 flex items-center justify-center rounded-full">
+                                    <i class="w-4 h-4" data-feather="inbox"></i>
+                                </div>
+                                <div class="ml-3">Mail Settings</div>
+                            </a>
+                            <a href="" class="flex items-center mt-2">
+                                <div
+                                    class="w-8 h-8 bg-theme-17 text-theme-11 flex items-center justify-center rounded-full">
+                                    <i class="w-4 h-4" data-feather="users"></i>
+                                </div>
+                                <div class="ml-3">Users & Permissions</div>
+                            </a>
+                            <a href="" class="flex items-center mt-2">
+                                <div
+                                    class="w-8 h-8 bg-theme-14 text-theme-10 flex items-center justify-center rounded-full">
+                                    <i class="w-4 h-4" data-feather="credit-card"></i>
+                                </div>
+                                <div class="ml-3">Transactions Report</div>
+                            </a>
+                        </div>
+                        <div class="search-result__content__title">Users</div>
+                        <div class="mb-5">
+                            <a href="" class="flex items-center mt-2">
+                                <div class="w-8 h-8 image-fit">
+                                    <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                        src="dist/images/profile-14.jpg" />
+                                </div>
+                                <div class="ml-3">Sean Connery</div>
+                                <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
+                                    seanconnery@left4code.com
+                                </div>
+                            </a>
+                            <a href="" class="flex items-center mt-2">
+                                <div class="w-8 h-8 image-fit">
+                                    <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                        src="dist/images/profile-1.jpg" />
+                                </div>
+                                <div class="ml-3">Robert De Niro</div>
+                                <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
+                                    robertdeniro@left4code.com
+                                </div>
+                            </a>
+                            <a href="" class="flex items-center mt-2">
+                                <div class="w-8 h-8 image-fit">
+                                    <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                        src="dist/images/profile-4.jpg" />
+                                </div>
+                                <div class="ml-3">Kevin Spacey</div>
+                                <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
+                                    kevinspacey@left4code.com
+                                </div>
+                            </a>
+                            <a href="" class="flex items-center mt-2">
+                                <div class="w-8 h-8 image-fit">
+                                    <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                        src="dist/images/profile-7.jpg" />
+                                </div>
+                                <div class="ml-3">Brad Pitt</div>
+                                <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
+                                    bradpitt@left4code.com
+                                </div>
+                            </a>
+                        </div>
+                        <div class="search-result__content__title">Products</div>
+                        <a href="" class="flex items-center mt-2">
+                            <div class="w-8 h-8 image-fit">
+                                <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                    src="dist/images/preview-8.jpg" />
+                            </div>
+                            <div class="ml-3">Sony A7 III</div>
+                            <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
+                                Photography
+                            </div>
+                        </a>
+                        <a href="" class="flex items-center mt-2">
+                            <div class="w-8 h-8 image-fit">
+                                <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                    src="dist/images/preview-11.jpg" />
+                            </div>
+                            <div class="ml-3">Oppo Find X2 Pro</div>
+                            <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
+                                Smartphone &amp; Tablet
+                            </div>
+                        </a>
+                        <a href="" class="flex items-center mt-2">
+                            <div class="w-8 h-8 image-fit">
+                                <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                    src="dist/images/preview-6.jpg" />
+                            </div>
+                            <div class="ml-3">Nikon Z6</div>
+                            <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
+                                Photography
+                            </div>
+                        </a>
+                        <a href="" class="flex items-center mt-2">
+                            <div class="w-8 h-8 image-fit">
+                                <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                    src="dist/images/preview-9.jpg" />
+                            </div>
+                            <div class="ml-3">Dell XPS 13</div>
+                            <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
+                                PC &amp; Laptop
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Search -->
+            <!-- BEGIN: Notifications -->
+            <div class="intro-x dropdown relative mr-4 sm:mr-6">
+                <div class="dropdown-toggle notification notification--light notification--bullet cursor-pointer">
+                    <i data-feather="bell" class="notification__icon"></i>
+                </div>
+                <div class="notification-content dropdown-box mt-8 absolute top-0 right-0 z-10 -mr-10 sm:mr-0">
+                    <div class="notification-content__box dropdown-box__content box">
+                        <div class="notification-content__title">Notifications</div>
+                        <div class="cursor-pointer relative flex items-center">
+                            <div class="w-12 h-12 flex-none image-fit mr-1">
+                                <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                    src="dist/images/profile-14.jpg" />
+                                <div
+                                    class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white">
+                                </div>
+                            </div>
+                            <div class="ml-2 overflow-hidden">
+                                <div class="flex items-center">
+                                    <a href="javascript:;" class="font-medium truncate mr-5">Sean Connery</a>
+                                    <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">
+                                        01:10 PM
+                                    </div>
+                                </div>
+                                <div class="w-full truncate text-gray-600">
+                                    Lorem Ipsum is simply dummy text of the printing and
+                                    typesetting industry. Lorem Ipsum has been the
+                                    industry&#039;s standard dummy text ever since the 1500
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cursor-pointer relative flex items-center mt-5">
+                            <div class="w-12 h-12 flex-none image-fit mr-1">
+                                <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                    src="dist/images/profile-1.jpg" />
+                                <div
+                                    class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white">
+                                </div>
+                            </div>
+                            <div class="ml-2 overflow-hidden">
+                                <div class="flex items-center">
+                                    <a href="javascript:;" class="font-medium truncate mr-5">Robert De Niro</a>
+                                    <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">
+                                        05:09 AM
+                                    </div>
+                                </div>
+                                <div class="w-full truncate text-gray-600">
+                                    Contrary to popular belief, Lorem Ipsum is not simply random
+                                    text. It has roots in a piece of classical Latin literature
+                                    from 45 BC, making it over 20
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cursor-pointer relative flex items-center mt-5">
+                            <div class="w-12 h-12 flex-none image-fit mr-1">
+                                <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                    src="dist/images/profile-4.jpg" />
+                                <div
+                                    class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white">
+                                </div>
+                            </div>
+                            <div class="ml-2 overflow-hidden">
+                                <div class="flex items-center">
+                                    <a href="javascript:;" class="font-medium truncate mr-5">Kevin Spacey</a>
+                                    <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">
+                                        05:09 AM
+                                    </div>
+                                </div>
+                                <div class="w-full truncate text-gray-600">
+                                    Contrary to popular belief, Lorem Ipsum is not simply random
+                                    text. It has roots in a piece of classical Latin literature
+                                    from 45 BC, making it over 20
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cursor-pointer relative flex items-center mt-5">
+                            <div class="w-12 h-12 flex-none image-fit mr-1">
+                                <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                    src="dist/images/profile-7.jpg" />
+                                <div
+                                    class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white">
+                                </div>
+                            </div>
+                            <div class="ml-2 overflow-hidden">
+                                <div class="flex items-center">
+                                    <a href="javascript:;" class="font-medium truncate mr-5">Brad Pitt</a>
+                                    <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">
+                                        05:09 AM
+                                    </div>
+                                </div>
+                                <div class="w-full truncate text-gray-600">
+                                    There are many variations of passages of Lorem Ipsum
+                                    available, but the majority have suffered alteration in some
+                                    form, by injected humour, or randomi
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cursor-pointer relative flex items-center mt-5">
+                            <div class="w-12 h-12 flex-none image-fit mr-1">
+                                <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                    src="dist/images/profile-14.jpg" />
+                                <div
+                                    class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white">
+                                </div>
+                            </div>
+                            <div class="ml-2 overflow-hidden">
+                                <div class="flex items-center">
+                                    <a href="javascript:;" class="font-medium truncate mr-5">Leonardo DiCaprio</a>
+                                    <div class="text-xs text-gray-500 ml-auto whitespace-no-wrap">
+                                        06:05 AM
+                                    </div>
+                                </div>
+                                <div class="w-full truncate text-gray-600">
+                                    Lorem Ipsum is simply dummy text of the printing and
+                                    typesetting industry. Lorem Ipsum has been the
+                                    industry&#039;s standard dummy text ever since the 1500
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Notifications -->
+            <!-- BEGIN: Account Menu -->
+            <div class="intro-x dropdown w-8 h-8 relative">
+                <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110">
+                    <img alt="Midone Tailwind HTML Admin Template" src="dist/images/profile-6.jpg" />
+                </div>
+                <div class="dropdown-box mt-10 absolute w-56 top-0 right-0 z-20">
+                    <div class="dropdown-box__content box bg-theme-5 text-black">
+                        <div class="p-4 border-b border-theme-40">
+                            <div class="font-medium">Sean Connery</div>
+                            <div class="text-xs text-theme-41">Backend Engineer</div>
+                        </div>
+                        <div class="p-2">
+                            <a href=""
+                                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-8 rounded-md ">
+                                <i data-feather="user" class="w-4 h-4 mr-2"></i> 個人資料
+                            </a>
+                            <a href=""
+                                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-8  rounded-md">
+                                <i data-feather="shopping-cart" class="w-4 h-4 mr-2"></i>
+                                我的購物車
+                            </a>
+                            <a href=""
+                                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-8  rounded-md">
+                                <i data-feather="lock" class="w-4 h-4 mr-2"></i>願望清單
+                            </a>
+                            <a href=""
+                                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-8 rounded-md">
+                                <i data-feather="help-circle" class="w-4 h-4 mr-2"></i> 購買記錄
+                            </a>
+                        </div>
+                        <div class="p-2 border-t border-theme-40">
+                            <a href="chooseside"
+                                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-8rounded-md">
+                                <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i>登入</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Account Menu -->
+        </div>
+    </div>
+    <!-- END: Top Bar -->
+    <!-- BEGIN: Top Menu -->
+    <nav class="top-nav">
+        <ul>
+            <li>
+                <a href="home" class="top-menu ">
+                    <div class="top-menu__icon"><i data-feather="home"></i></div>
+                    <div class="top-menu__title">About Us</div>
+                </a>
+            </li>
+    
+            <li>
+                <a href="course" class="top-menu top-menu--active">
+                    <div class="top-menu__icon"><i data-feather="layout"></i></div>
+                    <div class="top-menu__title">Course</div>
+                </a>
+            </li>
+            <li>
+                <a href="home" class="top-menu">
+                    <div class="top-menu__icon"><i data-feather="layout"></i></div>
+                    <div class="top-menu__title">Tutors</div>
+                </a>
+            </li>
+            <li>
+                <a href="videohome" class="top-menu">
+                    <div class="top-menu__icon"><i data-feather="layout"></i></div>
+                    <div class="top-menu__title">Volunterring</div>
+                </a>
+            </li>
+    
+            <li>
+                <a href="testbank" class="top-menu">
+                    <div class="top-menu__icon"><i data-feather="activity"></i></div>
+                    <div class="top-menu__title">Fee Subsidy</div>
+                </a>
+            </li>
+    
+            <li>
+                <a href="testbank" class="top-menu">
+                    <div class="top-menu__icon"><i data-feather="activity"></i></div>
+                    <div class="top-menu__title">Media</div>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- END: Top Menu -->
+    <!-- BEGIN: Content -->
+    <div class="content">
+        <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+            <h2 class="text-lg font-medium mr-auto">
+                All Courses
+            </h2>
+
+        </div>
+        <div class="pos intro-y  gap-5 mt-5">
+            <!-- BEGIN: Item List -->
+            <div class="intro-y ">
+                <div class="lg:flex intro-y">
+                    <div class="relative text-gray-700">
+                        <input type="text" class="input input--lg w-full lg:w-64 box pr-10 placeholder-theme-13"
+                            placeholder="Search item...">
+                        <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-feather="search"></i>
+                    </div>
+                    <select class="input input--lg box w-full lg:w-auto mt-3 lg:mt-0 ml-auto">
+                        <option>Sort By</option>
+                        <option>A to Z</option>
+                        <option>Z to A</option>
+                        <option>Lowest Price</option>
+                        <option>Highest Price</option>
+                    </select>
+
+                </div>
+                <div class="grid grid-cols-12 gap-5 mt-5" id="videotypearea">
+
+                </div>
+                <div class="grid grid-cols-12 gap-5 mt-5 pt-5 border-t border-theme-5" id="videolistarea">
+
+
+                </div>
+            </div>
+            <!-- END: Item List -->
+
+        </div>
+
+        <!-- BEGIN: Add Item Modal -->
+        <div class="modal" id="add-item-modal">
+            <div class="modal__content">
+                <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200">
+                    <h2 class="font-medium text-base mr-auto">
+                        Soft Drink
+                    </h2>
+                </div>
+                <div class="p-5 grid grid-cols-12 gap-4 row-gap-3">
+                    <div class="col-span-12">
+                        <label>Quantity</label>
+                        <div class="flex mt-2 flex-1">
+                            <button type="button" class="button w-12 border bg-gray-200 text-gray-600 mr-1">-</button>
+                            <input type="text" class="input w-full border text-center" placeholder="Item quantity"
+                                value="2">
+                            <button type="button" class="button w-12 border bg-gray-200 text-gray-600 ml-1">+</button>
+                        </div>
+                    </div>
+                    <div class="col-span-12">
+                        <label>Notes</label>
+                        <textarea class="input w-full border mt-2 flex-1" placeholder="Item notes"></textarea>
+                    </div>
+                </div>
+                <div class="px-5 py-3 text-right border-t border-gray-200">
+                    <button type="button" data-dismiss="modal"
+                        class="button w-24 border text-gray-700 mr-1">Cancel</button>
+                    <button type="button" class="button w-24 bg-theme-1 text-white">Add Item</button>
+                </div>
+            </div>
+        </div>
+        <!-- END: Add Item Modal -->
+    </div>
+    <!-- END: Content -->
+    <!-- BEGIN: JS Assets-->
+
+
+    <script>
+        var myuid
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                myuid = uid
+                var providerData = user.providerData;
+                // ...
+
+                if (emailVerified) {
+
+                } else {
+
+                }
+
+                console.log(user)
+
+                startpage()
+            } else {
+                // User is signed out.
+                // ...
+                window.location.href = "chooseside";
+            }
+        });
+
+        function genvideoitem(x) {
+            var tempitem = `  <a class="intro-y block col-span-12 sm:col-span-4 xxl:col-span-3">
+                        <div class="box rounded-md p-3 relative zoom-in">
+                            <div class="flex-none pos-image relative block">
+                                <div class="pos-image__preview image-fit">
+                                    <img onclick="window.location.href = 'payment?vid=` + x.vid + `'" src='` +
+                x.videobody +
+                `'>       </div>
+                            </div>
+                            <div class="block font-medium text-center truncate mt-3">` + x.videoname + `</div>
+                        </div>
+                    </a>`
+
+            return tempitem
+        }
+
+        function genvideolist(x) {
+            var tempvideos = ''
+            for (var j = 0; j < x.length; j++) {
+                tempvideos += genvideoitem(x[j])
+            }
+            return tempvideos
+        }
+
+
+        function genvideotype(x) {
+            var tempitem = `<div onclick="switchsubject('` + x.typename + `')" class="col-span-12 sm:col-span-4 xxl:col-span-3 box p-5 cursor-pointer zoom-in">
+                        <div class="font-medium text-base">` + x.typename + `</div>
+                        <div class="text-gray-600">` + x.typenum + ` Items</div>
+                    </div>`
+            return tempitem
+        }
+
+
+
+        function gentypelist(x) {
+            console.log(x)
+            var temptypes = ''
+            for (var j = 0; j < x.length; j++) {
+                temptypes += genvideotype(x[j])
+            }
+            return temptypes
+        }
+
+        function queryvideotype(videotype, callback) {
+            var data =
+                "{\n    TableName: \"awsquerydata\",\n    KeyConditionExpression: \"#t = :tname\",\n    ExpressionAttributeNames: {\n        \"#t\": \"type\",\n    },\n    ExpressionAttributeValues: {\n        \":tname\": " +
+                videotype + "\n    }\n}";
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                    callback(this.responseText)
+                }
+            });
+
+            xhr.open("GET", "getallvideo");
+            xhr.setRequestHeader("Content-Type", "text/plain");
+
+            xhr.send(data);
+        }
+
+        function getpurchaselist(callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                    callback(this.responseText)
+                }
+            });
+
+            xhr.open("GET", "getpurchaselist/" + myuid);
+
+            xhr.send();
+        }
+
+
+        nowtypename = "中文"
+
+        function getallvideos(callback) {
+            var data = JSON.stringify({
+                "TableName": "videodata"
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    // console.log(this.responseText);
+                    callback(this.responseText)
+                }
+            });
+
+            xhr.open("POST", "awsscandata/");
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.send(data);
+        }
+
+
+        function switchsubject(x) {
+            nowtypename = x
+            document.getElementById('videolistarea').innerHTML = genvideolist(myvideolist[
+                nowtypename])
+        }
+
+        var myvideolist = {}
+        var allvideolist = {}
+        var typelist = []
+
+        function startpage() {
+
+                getallvideos(function (allvideos) {
+                    allvideos = JSON.parse(allvideos).Items
+                    console.log(allvideos)
+                    allvideos.map(x => {
+                        allvideolist[x.vid] = x
+                    })
+                    allvideos.map(x => {
+                        if (x.subject&&x.vid){
+                            if (!myvideolist[allvideolist[x.vid].subject]) {
+                                myvideolist[allvideolist[x.vid].subject] = []
+                            }
+                            myvideolist[allvideolist[x.vid].subject].push({
+                                videobody: allvideolist[x.vid].photourl,
+                                videoname: allvideolist[x.vid].title,
+                                vid: x.vid
+                            })
+                        }
+                        
+                    })
+                    console.log(myvideolist)
+                    for (var j in myvideolist) {
+                        typelist.push({
+                            typename: j,
+                            typenum: myvideolist[j].length
+                        })
+                    }
+                    document.getElementById("videotypearea").innerHTML = gentypelist(typelist)
+                    document.getElementById('videolistarea').innerHTML = genvideolist(myvideolist[
+                        nowtypename])
+                })
+
+            // document.getElementById("videotypearea").innerHTML = gentypelist([{
+            //     typename: "中文",
+            //     typenum: 0
+            // }, {
+            //     typename: "英文",
+            //     typenum: 0
+            // }, {
+            //     typename: "數學",
+            //     typenum: 0
+            // }, {
+            //     typename: "通識",
+            //     typenum: 0
+            // }])
+
+            // // queryvideotype(nowtypename, function (x) {
+
+            // // })
+
+
+            // document.getElementById('videolistarea').innerHTML = genvideolist([{
+            //     videoname: "testing",
+            //     videobody: "<img src='https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png'>"
+            // }, {
+            //     videoname: "testing2",
+            //     videobody: "<img src='https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png'>"
+            // }, {
+            //     videoname: "testing3",
+            //     videobody: "<img src='https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F910902871_640x360.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png'>"
+            // }])
+        }
+    </script>
+
+
+
+    <script
+        src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script src="dist/js/app.js"></script>
+    <!-- END: JS Assets-->
+</body>
+
+</html>
