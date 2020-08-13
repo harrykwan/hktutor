@@ -2,7 +2,7 @@
 const stripe = require('stripe')('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');
 
 
-
+/** get the transaction amount, currency expected to be hkd, and a callback function */
 async function getclientsecret(amount, callback) {
     const paymentIntent = await stripe.paymentIntents.create({
         amount: amount,

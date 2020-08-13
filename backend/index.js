@@ -97,7 +97,7 @@ app.get('/course', (req, res) => res.sendFile('html/course.html', {
     root: __dirname
 }))
 
-
+/** stripe get item price, user's credentials */
 app.get('/stripesecret/:vid', async (req, res) => {
     awsapi.readvideoitem("videodata", req.params.vid, undefined, undefined, function (x) {
         console.log(x.Item.price)
@@ -113,7 +113,7 @@ app.get('/stripesecret/:vid', async (req, res) => {
 });
 
 
-
+/** add purchased video to user's list of videos owned after payment */
 app.post('/paydone', (req, res, next) => {
     console.log(req.body)
     awsapi.readitem("userpurchase", req.body.uid, undefined, undefined, function (x) {
@@ -245,7 +245,7 @@ app.get('/readvideodata/:vid', (req, res) => {
 app.get('/readvideocomment/:vid', (req, res) => {
     awsapi.readvideoitem("videocomment", req.params.vid, req, res)
 })
-
+/** add comment into video, not related to vimeo comment */
 app.post('/addvideocomment/:vid', (req, res) => {
     awsapi.readvideoitem("videocomment", req.params.vid, undefined, undefined, function (x) {
         console.log(req.body)
