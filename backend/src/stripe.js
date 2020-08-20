@@ -1,20 +1,20 @@
 // const stripe = require('stripe')('sk_test_CRl2Sto6lG7ZEjnvDIfJxtZx00uRtS3tJx');
-const stripe = require('stripe')('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');
-
+const stripe = require("stripe")(
+  "sk_test_51HHvRsE9vhzAvHLMRdfXWrzO7OwR3q1RwGSatovaBbWAaOGQaHsjLHcGO8fsXLWekETzX76lvtCaB6Wc7yoqIV7Z00IbBcgFAT"
+);
 
 /** get the transaction amount, currency expected to be hkd, and a callback function */
 async function getclientsecret(amount, callback) {
-    const paymentIntent = await stripe.paymentIntents.create({
-        amount: amount,
-        currency: 'hkd',
-        // Verify your integration in this guide by including this parameter
-        metadata: {
-            integration_check: 'accept_a_payment'
-        },
-    });
-    console.log(paymentIntent)
-    callback(paymentIntent.client_secret)
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: amount,
+    currency: "hkd",
+    // Verify your integration in this guide by including this parameter
+    metadata: {
+      integration_check: "accept_a_payment",
+    },
+  });
+  console.log(paymentIntent);
+  callback(paymentIntent.client_secret);
 }
 
-
-exports.getclientsecret = getclientsecret
+exports.getclientsecret = getclientsecret;
